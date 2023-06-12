@@ -64,6 +64,7 @@
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -210,6 +211,31 @@
             this.dataGridView1.Size = new System.Drawing.Size(786, 314);
             this.dataGridView1.TabIndex = 0;
             // 
+            // lb_Template
+            // 
+            this.lb_Template.AutoSize = true;
+            this.lb_Template.Location = new System.Drawing.Point(18, 14);
+            this.lb_Template.Name = "lb_Template";
+            this.lb_Template.Size = new System.Drawing.Size(67, 13);
+            this.lb_Template.TabIndex = 0;
+            this.lb_Template.TabStop = true;
+            this.lb_Template.Text = "Lấy File Mẫu";
+            this.lb_Template.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lb_Template_LinkClicked);
+            // 
+            // bt_CreateQR_LoadFile
+            // 
+            this.bt_CreateQR_LoadFile.Location = new System.Drawing.Point(91, 9);
+            this.bt_CreateQR_LoadFile.Name = "bt_CreateQR_LoadFile";
+            this.bt_CreateQR_LoadFile.Size = new System.Drawing.Size(75, 23);
+            this.bt_CreateQR_LoadFile.TabIndex = 1;
+            this.bt_CreateQR_LoadFile.Text = "Đọc File";
+            this.bt_CreateQR_LoadFile.UseVisualStyleBackColor = true;
+            this.bt_CreateQR_LoadFile.Click += new System.EventHandler(this.bt_CreateQR_LoadFile_Click);
+            // 
+            // tienNopBindingSource
+            // 
+            this.tienNopBindingSource.DataSource = typeof(HocPhi.DataModel.TienNop);
+            // 
             // sttDataGridViewTextBoxColumn
             // 
             this.sttDataGridViewTextBoxColumn.DataPropertyName = "Stt";
@@ -285,6 +311,16 @@
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(681, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Tạo QR";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -308,6 +344,8 @@
             this.groupBox6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }

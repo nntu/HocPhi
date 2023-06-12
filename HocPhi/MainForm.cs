@@ -34,6 +34,7 @@ namespace HocPhi
         List<TienNop> listtiennp;
         private Config _cf;
 
+
         public MainForm()
         {
             InitializeComponent();
@@ -263,8 +264,8 @@ namespace HocPhi
                 toolStripStatusLabel1.Visible = false;
 
 
-         
-               
+
+
 
                 OpenExplorer(qrfolder);
             }
@@ -296,8 +297,8 @@ namespace HocPhi
                 j++;
             }
 
-        }
-
+        } 
+        
         private void bt_mauQr_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
