@@ -1,6 +1,7 @@
 ﻿using NLog;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
+using NPOI.XWPF.UserModel;
 using QRCoder;
 using QRNapasLib;
 using System;
@@ -12,7 +13,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static HocPhi.DataModel;
 
 namespace HocPhi
@@ -20,13 +23,14 @@ namespace HocPhi
     public partial class MainForm : Form
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        private string datadir = "";
+        
         private string tempfolder;
         private string qrfolder;
 
         private string temp_template_excel;
         List<TienNop> listtiennp;
         private Config _cf;
+        private string KetxuatFilefolder;
 
 
         public MainForm()
@@ -55,20 +59,23 @@ namespace HocPhi
 
             tempfolder = AppDomain.CurrentDomain.BaseDirectory + "temp";
             qrfolder = Directory.GetCurrentDirectory() + @"\qrcode";
+            KetxuatFilefolder = Directory.GetCurrentDirectory() + @"\ketxuat";
+
             // If directory doesn't exist create one
             if (!Directory.Exists(tempfolder))
             {
                 Directory.CreateDirectory(tempfolder);
             }
-
+            if (!Directory.Exists(KetxuatFilefolder))
+            {
+                Directory.CreateDirectory(KetxuatFilefolder);
+            }
             if (!Directory.Exists(qrfolder))
             {
                 Directory.CreateDirectory(qrfolder);
             }
 
-            //string databaseName = "data.db3";
-
-            //DatabaseHandler dbh = new DatabaseHandler(Path.Combine(datadir, databaseName));
+        
 
         }
 
@@ -155,6 +162,9 @@ namespace HocPhi
 
                             //Loai_thu_1 	So_tien_thu_1	Loai_thu_2	So_tien_thu_2	Loai_thu_3	So_tien_thu_3 	Loai_thu_4	So_tien_thu_4 	Loai_thu_5	So_tien_thu_5 	Loai_thu_6	So_tien_thu_6 	Loai_thu_7	So_tien_thu_7 	Loai_thu_8	So_tien_thu_8	Loai_thu_9	So_tien_thu_9	Loai_thu_10	So_tien_thu_10
 
+                            Dictionary<string, int> loaithu = new Dictionary<string, int>();
+                            var tongsotien = 0;
+                            var noidung = "";
                             for (var ii = 6; ii <= 24; ii++)
                             {
                                 if (ii % 2 == 0)
@@ -168,23 +178,28 @@ namespace HocPhi
                                             var So_tien_ex = formatter.FormatCellValue(curRow.GetCell(ii + 1)).Trim();
                                             var sotien = 0;
                                             if (So_tien_ex != "") { sotien = Convert.ToInt32(So_tien_ex); }
+                                            
+                                            loaithu[loai_thu] = sotien;
+                                            tongsotien += sotien;
+                                            noidung = noidung + "_" + loai_thu;
 
-                                            ds.Add(new TienNop()
-                                            {
-                                                TenTK_Nop = TenTK_Nop.Trim(),
-                                                Tai_khoan_nop = Tai_khoan_nop.Trim(),
-                                                ma_hs = ma_hs,
-                                                Stt = i,
-                                                Hoten_HocSinh = Hoten_HocSinh,
-                                                Lop = Lop,
-                                                Loai_Thu = loai_thu,
-                                                So_Tien = sotien,
-                                            });
+
                                         }
                                     }
                                 }
                             }
-
+                            ds.Add(new TienNop()
+                            {
+                                TenTK_Nop = TenTK_Nop.Trim(),
+                                Tai_khoan_nop = Tai_khoan_nop.Trim(),
+                                ma_hs = ma_hs,
+                                Stt = i,
+                                Hoten_HocSinh = Hoten_HocSinh,
+                                Lop = Lop,
+                                LoaiThu = loaithu,
+                                Tong_So_Tien = tongsotien,
+                                NoiDung = noidung
+                            });
                         }
 
                         if (progress != null) progress.Report(i);
@@ -248,14 +263,24 @@ namespace HocPhi
 
                 var ls = (List<TienNop>)dataGridView1.DataSource;
                 toolStripProgressBar1.Maximum = ls.Count();
-                qrfolder = $"{qrfolder}\\{DateTime.Now.ToString("ddMMyyyy_hhmmss")}";
+
+
+                               
+
+
+                KetxuatFilefolder = $"{KetxuatFilefolder}\\{DateTime.Now.ToString("ddMMyyyy_hhmmss")}";
+                if (!Directory.Exists(KetxuatFilefolder))
+                {
+                    Directory.CreateDirectory(KetxuatFilefolder);
+                }
+                qrfolder = $"{KetxuatFilefolder}\\Qrcode";
 
                 if (!Directory.Exists(qrfolder))
                 {
                     Directory.CreateDirectory(qrfolder);
                 }
 
-                await Task.Run(() => CreateQR(progress, ls, qrfolder));
+                await Task.Run(() => CreateQR(progress, ls, KetxuatFilefolder));
 
                 toolStripProgressBar1.Visible = false;
                 toolStripStatusLabel1.Visible = false;
@@ -264,7 +289,7 @@ namespace HocPhi
 
 
 
-                OpenExplorer(qrfolder);
+                OpenExplorer(KetxuatFilefolder);
             }
 
 
@@ -274,37 +299,116 @@ namespace HocPhi
         {
             return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
         }
-        private void CreateQR(IProgress<int> progress, List<TienNop> ds, string qrfolder)
+        private void CreateQR(IProgress<int> progress, List<TienNop> ds, string KetxuatFilefolder)
         {
+           
             var j = 1;
             foreach (var i in ds)
             {
-
-                var tknhan = i.Tai_khoan_nop;
                 var hotenhs = StringEx.RemoveVietnameseTone(i.Hoten_HocSinh).ToUpper();
-                var noidung = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.Loai_Thu)).ToUpper();
+                var filename = string.Format("{0}_{1}_{2}_{3}.docx", i.ma_hs, hotenhs, i.Lop, DateTime.Now.ToString("ddMMyyyy_hhmmss"));
+                XWPFDocument doc;
+                using (Stream fileStream = File.OpenRead("THONG_BAO.docx"))
+                {
+                    doc = new XWPFDocument(fileStream);
+                    fileStream.Close();
+                }
+                foreach (var para in doc.Paragraphs)
+                {
+                    para.ReplaceText("{hoten}", i.Hoten_HocSinh);
+                    para.ReplaceText("{lop}", i.Lop);
+                    para.ReplaceText("{mahs}", i.ma_hs);
+                  
+                    
 
 
-                var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, i.So_Tien, noidung);
+                }
+                var noidung = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.NoiDung)).ToUpper();
 
+
+                
+
+                var tb1 = doc.Tables[0];
+
+                var c2 = tb1.GetRow(0).GetCell(1);
+                XWPFParagraph p2= c2.AddParagraph();
+                XWPFRun r2 = p2.CreateRun();
+                r2.SetText(i.Tong_So_Tien.ToString("#,##0"));
+               
+                c2 = tb1.GetRow(1).GetCell(1);
+                p2 = c2.AddParagraph();
+                r2 = p2.CreateRun();
+                r2.SetText(noidung);
+
+                XWPFTableCell c1 = tb1.GetRow(0).GetCell(2);
+                XWPFParagraph p1 = c1.AddParagraph();   //don't use doc.CreateParagraph
+                XWPFRun r1 = p1.CreateRun();
+                var vietqr_full = Generator.Generator_QRNapas("BIDV", i.Tai_khoan_nop, i.Tong_So_Tien, noidung);
 
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(vietqr_full, QRCodeGenerator.ECCLevel.Q);
                 Bitmap qrCodeImage;
                 ArtQRCode qrCode = new ArtQRCode(qrCodeData);
                 qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
 
-                var imagePath_lite = qrfolder + "\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, i.Loai_Thu))).ToUpper();
+                var widthEmus = (int)(100.0 * 9525);
+                var heightEmus = (int)(100.0 * 9525);
+
+                var imagePath_full = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop,"full"))).ToUpper();
+                qrCodeImage.Save(imagePath_full, ImageFormat.Png);
+                using (FileStream picData = new FileStream(imagePath_full, FileMode.Open, FileAccess.Read))
+                {
+                    r1.AddPicture(picData, (int)NPOI.SS.UserModel.PictureType.PNG, "image1", widthEmus, heightEmus);
+                }
+
+                var tb2 = doc.Tables[1];
+
+                var a = 1;
+                foreach (KeyValuePair<string, int> j2 in i.LoaiThu)
+                {
+
+                    XWPFTableRow tableRowTwo = tb2.CreateRow();
+                    tableRowTwo.GetCell(0).SetText(a.ToString());
+                    tableRowTwo.GetCell(1).SetText(j2.Key); 
+                    tableRowTwo.GetCell(2).SetText(j2.Value.ToString("#,##0"));
 
 
 
-                qrCodeImage.Save(imagePath_lite, ImageFormat.Png);
+                    var tknhan = i.Tai_khoan_nop;
+                   
+                    var noidung = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, j2.Key)).ToUpper();
 
+                    var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, j2.Value, noidung);
 
+                     qrGenerator = new QRCodeGenerator();
+                     qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
+                    
+                     qrCode = new ArtQRCode(qrCodeData);
+                    qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
+
+                    var imagePath_lite = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Key))).ToUpper();
+
+                    qrCodeImage.Save(imagePath_lite, ImageFormat.Png);
+                    var tb3 = tableRowTwo.GetCell(3);
+                    p1 = tb3.AddParagraph();   //don't use doc.CreateParagraph
+                    r1 = p1.CreateRun();
+                    using (FileStream picData = new FileStream(imagePath_lite, FileMode.Open, FileAccess.Read))
+                    {
+                        r1.AddPicture(picData, (int)NPOI.SS.UserModel.PictureType.PNG, "image1", widthEmus/2, heightEmus/2);
+                    }
+
+                    a++;
+                }
+
+                using (FileStream fileStreamNew = File.Create(KetxuatFilefolder + "\\"+ filename))
+                {
+                    doc.Write(fileStreamNew);
+                    fileStreamNew.Close();
+                }
 
                 j++;
             }
-
+           
         }
 
         private void bt_mauQr_Click(object sender, EventArgs e)
@@ -313,6 +417,37 @@ namespace HocPhi
             {
                 bt_mauQr.BackColor = colorDialog1.Color;
             };
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            XWPFDocument doc;
+            using (Stream fileStream = File.OpenRead("THONG_BAO.docx"))
+            {
+                doc = new XWPFDocument(fileStream);
+                fileStream.Close();
+            }
+
+
+            var tb2 = doc.Tables[1];
+            for (int i = 0; i < 5; i++) {
+
+                XWPFTableRow tableRowTwo = tb2.CreateRow();
+                tableRowTwo.GetCell(0).SetText("   row 2 cell 1   ");
+                tableRowTwo.GetCell(1).SetText("   row 2 cell 2   ");
+
+
+            }
+
+
+
+
+            using (FileStream fileStreamNew = File.Create("test.docx"))
+            {
+                doc.Write(fileStreamNew);
+                fileStreamNew.Close();
+            }
         }
     }
 }

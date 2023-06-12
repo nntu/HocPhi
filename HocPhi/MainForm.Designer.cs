@@ -42,18 +42,20 @@
             this.bt_CreateQR_LoadFile = new System.Windows.Forms.Button();
             this.lb_Template = new System.Windows.Forms.LinkLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tienNopBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.tienNopBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sttDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenTKNopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taikhoannopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mahsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hotenHocSinhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Loai_Thu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.So_Tien = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.noiDungDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tongSoTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loaiThuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
             this.tb_CreateQR.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -122,6 +124,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.button2);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox6);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
             this.splitContainer1.Panel1.Controls.Add(this.bt_CreateQR_LoadFile);
@@ -138,7 +141,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.bt_mauQr);
-            this.groupBox6.Location = new System.Drawing.Point(495, 14);
+            this.groupBox6.Location = new System.Drawing.Point(354, 4);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(113, 77);
             this.groupBox6.TabIndex = 42;
@@ -158,7 +161,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(681, 4);
+            this.button1.Location = new System.Drawing.Point(473, 58);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -200,8 +203,9 @@
             this.mahsDataGridViewTextBoxColumn,
             this.hotenHocSinhDataGridViewTextBoxColumn,
             this.lopDataGridViewTextBoxColumn,
-            this.Loai_Thu,
-            this.So_Tien});
+            this.noiDungDataGridViewTextBoxColumn,
+            this.tongSoTienDataGridViewTextBoxColumn,
+            this.loaiThuDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.tienNopBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -209,10 +213,6 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(786, 314);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // tienNopBindingSource
-            // 
-            this.tienNopBindingSource.DataSource = typeof(HocPhi.DataModel.TienNop);
             // 
             // tabPage2
             // 
@@ -228,6 +228,20 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(628, 57);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 43;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // tienNopBindingSource
+            // 
+            this.tienNopBindingSource.DataSource = typeof(HocPhi.DataModel.TienNop);
             // 
             // sttDataGridViewTextBoxColumn
             // 
@@ -271,19 +285,26 @@
             this.lopDataGridViewTextBoxColumn.Name = "lopDataGridViewTextBoxColumn";
             this.lopDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // Loai_Thu
+            // noiDungDataGridViewTextBoxColumn
             // 
-            this.Loai_Thu.DataPropertyName = "Loai_Thu";
-            this.Loai_Thu.HeaderText = "Loai_Thu";
-            this.Loai_Thu.Name = "Loai_Thu";
-            this.Loai_Thu.ReadOnly = true;
+            this.noiDungDataGridViewTextBoxColumn.DataPropertyName = "NoiDung";
+            this.noiDungDataGridViewTextBoxColumn.HeaderText = "NoiDung";
+            this.noiDungDataGridViewTextBoxColumn.Name = "noiDungDataGridViewTextBoxColumn";
+            this.noiDungDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // So_Tien
+            // tongSoTienDataGridViewTextBoxColumn
             // 
-            this.So_Tien.DataPropertyName = "So_Tien";
-            this.So_Tien.HeaderText = "So_Tien";
-            this.So_Tien.Name = "So_Tien";
-            this.So_Tien.ReadOnly = true;
+            this.tongSoTienDataGridViewTextBoxColumn.DataPropertyName = "Tong_So_Tien";
+            this.tongSoTienDataGridViewTextBoxColumn.HeaderText = "Tong_So_Tien";
+            this.tongSoTienDataGridViewTextBoxColumn.Name = "tongSoTienDataGridViewTextBoxColumn";
+            this.tongSoTienDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // loaiThuDataGridViewTextBoxColumn
+            // 
+            this.loaiThuDataGridViewTextBoxColumn.DataPropertyName = "LoaiThu";
+            this.loaiThuDataGridViewTextBoxColumn.HeaderText = "LoaiThu";
+            this.loaiThuDataGridViewTextBoxColumn.Name = "loaiThuDataGridViewTextBoxColumn";
+            this.loaiThuDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // MainForm
             // 
@@ -321,9 +342,6 @@
         private System.Windows.Forms.LinkLabel lb_Template;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn loaiPhiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sotienDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource tienNopBindingSource;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -332,14 +350,17 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button bt_mauQr;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn sttDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenTKNopDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn taikhoannopDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn mahsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hotenHocSinhDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lopDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Loai_Thu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn So_Tien;
+        private System.Windows.Forms.DataGridViewTextBoxColumn noiDungDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tongSoTienDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn loaiThuDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource tienNopBindingSource;
     }
 }
 

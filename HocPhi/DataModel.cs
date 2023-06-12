@@ -1,4 +1,7 @@
-﻿namespace HocPhi
+﻿using System.Collections.Generic;
+using System.Windows.Documents;
+
+namespace HocPhi
 {
     public class DataModel
     {
@@ -19,10 +22,11 @@
             public string Hoten_HocSinh { get; set; }
             public string Lop { get; set; }
 
+            public string NoiDung { get; set; }
+            public int Tong_So_Tien { get; set; }
 
-            public string Loai_Thu { get; set; }
-            public int So_Tien { get; set; }
 
+            public Dictionary<string, int> LoaiThu { get; set; }
         }
 
 
