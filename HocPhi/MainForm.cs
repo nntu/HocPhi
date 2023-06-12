@@ -1,22 +1,16 @@
-﻿
-using MathNet.Numerics.LinearAlgebra.Factorization;
-using NLog;
+﻿using NLog;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using QRCoder;
 using QRNapasLib;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static HocPhi.DataModel;
@@ -29,7 +23,7 @@ namespace HocPhi
         private string datadir = "";
         private string tempfolder;
         private string qrfolder;
- 
+
         private string temp_template_excel;
         List<TienNop> listtiennp;
         private Config _cf;
@@ -80,9 +74,9 @@ namespace HocPhi
 
         private void lb_Template_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            var timestamp = DateTime.Now.ToFileTime();
-            FileInfo fi = new FileInfo(@"template_2023.xlsx");
-            temp_template_excel = string.Format("{0}\\template_2023_{1}.xlsx", tempfolder, timestamp);
+            var timestamp = DateTime.Now.ToString("ddMMyyyy_hhmmss");
+            FileInfo fi = new FileInfo(@"Template_DongThap_2023.xlsx");
+            temp_template_excel = string.Format("{0}\\Template_DongThap_2023_{1}.xlsx", tempfolder, timestamp);
             fi.CopyTo(temp_template_excel, true);
             Process process = new Process();
             process.StartInfo.FileName = temp_template_excel;
@@ -145,49 +139,52 @@ namespace HocPhi
                         // Get data from the 4th column (4th cell of each row)
                         // curRow.GetCell(1).SetCellType(CellType.String);
                         // curRow.GetCell(1).SetCellType(CellType.String);
-                        if (curRow.GetCell(1) != null)
+                        if (curRow.GetCell(0) != null)
                         {
                             DataFormatter formatter = new DataFormatter();
 
                             //Stt	TenTK_Nop	Tai_khoan_nop	ma_hs	Hoten_HocSinh	Lop	LoaiPhi	So_tien
 
 
-                            var TenTK_Nop = curRow.GetCell(1) == null ? "" : formatter.FormatCellValue(curRow.GetCell(1)).Trim();
-                            var Tai_khoan_nop = curRow.GetCell(2) == null ? "" : formatter.FormatCellValue(curRow.GetCell(2)).Trim();
+                            var TenTK_Nop = curRow.GetCell(0) == null ? "" : formatter.FormatCellValue(curRow.GetCell(0)).Trim();
+                            var Tai_khoan_nop = curRow.GetCell(1) == null ? "" : formatter.FormatCellValue(curRow.GetCell(1)).Trim();
                             var ma_hs = curRow.GetCell(3) == null ? "" : formatter.FormatCellValue(curRow.GetCell(3)).Trim();
 
-                            var Hoten_HocSinh = curRow.GetCell(4) == null ? "" : formatter.FormatCellValue(curRow.GetCell(4)).Trim();
+                            var Hoten_HocSinh = curRow.GetCell(5) == null ? "" : formatter.FormatCellValue(curRow.GetCell(5)).Trim();
+                            var Lop = curRow.GetCell(4) == null ? "" : formatter.FormatCellValue(curRow.GetCell(4)).Trim();
 
-                            var Lop = curRow.GetCell(5) == null ? "" : formatter.FormatCellValue(curRow.GetCell(5)).Trim();
+                            //Loai_thu_1 	So_tien_thu_1	Loai_thu_2	So_tien_thu_2	Loai_thu_3	So_tien_thu_3 	Loai_thu_4	So_tien_thu_4 	Loai_thu_5	So_tien_thu_5 	Loai_thu_6	So_tien_thu_6 	Loai_thu_7	So_tien_thu_7 	Loai_thu_8	So_tien_thu_8	Loai_thu_9	So_tien_thu_9	Loai_thu_10	So_tien_thu_10
 
-                            var LoaiPhi = curRow.GetCell(6) == null ? "" : formatter.FormatCellValue(curRow.GetCell(6)).Trim();
-                            var Sotien_ex = curRow.GetCell(7) == null ? "" : formatter.FormatCellValue(curRow.GetCell(7)).Trim();
-
-
-                            var sotien = 0;
-                            if (Sotien_ex == "")
+                            for (var ii = 6; ii <= 24; ii++)
                             {
-                                sotien = 0;
+                                if (ii % 2 == 0)
+                                {
+                                    if (curRow.GetCell(ii) != null)
+                                    {
+
+                                        var loai_thu = formatter.FormatCellValue(curRow.GetCell(ii)).Trim();
+                                        if (loai_thu != "")
+                                        {
+                                            var So_tien_ex = formatter.FormatCellValue(curRow.GetCell(ii + 1)).Trim();
+                                            var sotien = 0;
+                                            if (So_tien_ex != "") { sotien = Convert.ToInt32(So_tien_ex); }
+
+                                            ds.Add(new TienNop()
+                                            {
+                                                TenTK_Nop = TenTK_Nop.Trim(),
+                                                Tai_khoan_nop = Tai_khoan_nop.Trim(),
+                                                ma_hs = ma_hs,
+                                                Stt = i,
+                                                Hoten_HocSinh = Hoten_HocSinh,
+                                                Lop = Lop,
+                                                Loai_Thu = loai_thu,
+                                                So_Tien = sotien,
+                                            });
+                                        }
+                                    }
+                                }
                             }
-                            else
-                            {
-                                sotien = Convert.ToInt32(StringEx.RemoveNonNumeric(Sotien_ex));
 
-
-                            }
-                            var Noi_Dung = curRow.GetCell(9) == null ? "" : formatter.FormatCellValue(curRow.GetCell(9)).Trim();
-
-                            ds.Add(new TienNop()
-                            {
-                                TenTK_Nop = TenTK_Nop.Trim(),
-                                Tai_khoan_nop = Tai_khoan_nop.Trim(),
-                                ma_hs = ma_hs,
-                                Stt = i,
-                                Hoten_HocSinh = Hoten_HocSinh,
-                                Lop = Lop,
-                                LoaiPhi = LoaiPhi.ToUpper(),
-                                So_tien = sotien,
-                            });
                         }
 
                         if (progress != null) progress.Report(i);
@@ -247,7 +244,7 @@ namespace HocPhi
                     toolStripProgressBar1.Value = percent;
                 });
 
-               
+
 
                 var ls = (List<TienNop>)dataGridView1.DataSource;
                 toolStripProgressBar1.Maximum = ls.Count();
@@ -270,26 +267,37 @@ namespace HocPhi
                 OpenExplorer(qrfolder);
             }
 
-            
+
 
         }
-
-        private void CreateQR(IProgress<int> progress, List<TienNop> ds,string qrfolder) {
+        public string ReplaceInvalidChars(string filename)
+        {
+            return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
+        }
+        private void CreateQR(IProgress<int> progress, List<TienNop> ds, string qrfolder)
+        {
             var j = 1;
             foreach (var i in ds)
             {
 
-                var tknhan = i.TenTK_Nop; 
+                var tknhan = i.Tai_khoan_nop;
                 var hotenhs = StringEx.RemoveVietnameseTone(i.Hoten_HocSinh).ToUpper();
-                var noidung = string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.LoaiPhi);
-                var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, i.So_tien, noidung);
+                var noidung = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.Loai_Thu)).ToUpper();
+
+
+                var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, i.So_Tien, noidung);
+
+
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
                 Bitmap qrCodeImage;
                 ArtQRCode qrCode = new ArtQRCode(qrCodeData);
                 qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
 
-                var imagePath_lite = string.Format("{0}\\{1}_{2}_{3}_{4}.png", qrfolder, i.ma_hs, hotenhs, i.Lop, i.LoaiPhi);
+                var imagePath_lite = qrfolder + "\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, i.Loai_Thu))).ToUpper();
+
+
+
                 qrCodeImage.Save(imagePath_lite, ImageFormat.Png);
 
 
@@ -297,8 +305,8 @@ namespace HocPhi
                 j++;
             }
 
-        } 
-        
+        }
+
         private void bt_mauQr_Click(object sender, EventArgs e)
         {
             if (colorDialog1.ShowDialog() == DialogResult.OK)
