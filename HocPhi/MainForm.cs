@@ -323,7 +323,7 @@ namespace HocPhi
 
 
                 }
-                var noidung = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.NoiDung)).ToUpper();
+                var noidung_full = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.NoiDung)).ToUpper();
 
 
                 
@@ -338,12 +338,12 @@ namespace HocPhi
                 c2 = tb1.GetRow(1).GetCell(1);
                 p2 = c2.AddParagraph();
                 r2 = p2.CreateRun();
-                r2.SetText(noidung);
+                r2.SetText(noidung_full);
 
                 XWPFTableCell c1 = tb1.GetRow(0).GetCell(2);
                 XWPFParagraph p1 = c1.AddParagraph();   //don't use doc.CreateParagraph
                 XWPFRun r1 = p1.CreateRun();
-                var vietqr_full = Generator.Generator_QRNapas("BIDV", i.Tai_khoan_nop, i.Tong_So_Tien, noidung);
+                var vietqr_full = Generator.Generator_QRNapas("BIDV", i.Tai_khoan_nop, i.Tong_So_Tien, noidung_full);
 
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(vietqr_full, QRCodeGenerator.ECCLevel.Q);
@@ -375,8 +375,8 @@ namespace HocPhi
 
 
                     var tknhan = i.Tai_khoan_nop;
-                   
-                    var noidung = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, j2.Key)).ToUpper();
+
+                    string noidung = StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2} TTT {3}", i.ma_hs, hotenhs, i.Lop, j2.Key)).ToUpper();
 
                     var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, j2.Value, noidung);
 
