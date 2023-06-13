@@ -42,11 +42,6 @@
             this.bt_CreateQR_LoadFile = new System.Windows.Forms.Button();
             this.lb_Template = new System.Windows.Forms.LinkLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.button2 = new System.Windows.Forms.Button();
-            this.tienNopBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sttDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenTKNopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taikhoannopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +51,9 @@
             this.noiDungDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tongSoTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.loaiThuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tienNopBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
             this.tb_CreateQR.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -71,7 +69,6 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tb_CreateQR);
-            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -124,7 +121,6 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.button2);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox6);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
             this.splitContainer1.Panel1.Controls.Add(this.bt_CreateQR_LoadFile);
@@ -141,7 +137,7 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.bt_mauQr);
-            this.groupBox6.Location = new System.Drawing.Point(354, 4);
+            this.groupBox6.Location = new System.Drawing.Point(203, 14);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(113, 77);
             this.groupBox6.TabIndex = 42;
@@ -161,7 +157,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(473, 58);
+            this.button1.Location = new System.Drawing.Point(340, 68);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -213,35 +209,6 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(786, 314);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(792, 424);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(628, 57);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 43;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // tienNopBindingSource
-            // 
-            this.tienNopBindingSource.DataSource = typeof(HocPhi.DataModel.TienNop);
             // 
             // sttDataGridViewTextBoxColumn
             // 
@@ -306,6 +273,15 @@
             this.loaiThuDataGridViewTextBoxColumn.Name = "loaiThuDataGridViewTextBoxColumn";
             this.loaiThuDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // tienNopBindingSource
+            // 
+            this.tienNopBindingSource.DataSource = typeof(HocPhi.DataModel.TienNop);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,7 +317,6 @@
         private System.Windows.Forms.Button bt_CreateQR_LoadFile;
         private System.Windows.Forms.LinkLabel lb_Template;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
@@ -350,7 +325,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button bt_mauQr;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.DataGridViewTextBoxColumn sttDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tenTKNopDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn taikhoannopDataGridViewTextBoxColumn;
