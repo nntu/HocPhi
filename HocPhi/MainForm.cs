@@ -307,7 +307,7 @@ namespace HocPhi
 
         }
 
-        private void CreateQR(Progress<int> progress, List<TienNop> ds, string ketxuatFilefolder)
+        private void CreateQR(IProgress<int> progress, List<TienNop> ds, string ketxuatFilefolder)
         {
             var j = 1;
             foreach (var i in ds)
@@ -333,7 +333,7 @@ namespace HocPhi
                 qrCodeImage.Save(imagePath_full, ImageFormat.Png);
 
                 // load tempalte
-                var fileName = "templates\\Report.tpl";
+                var fileName = "templates\\MainReport.tpl";
                 var data = File.ReadAllText(fileName);
 
                 var parser = new FluidParser();
@@ -395,9 +395,6 @@ namespace HocPhi
                     sw.WriteLine(result);
                 }
 
-
-
-
                 using (FileStream pdfDest = File.Open(KetxuatFilefolder + "\\" +file_pdf, FileMode.Create))
                 {
                     ConverterProperties converterProperties = new ConverterProperties();
@@ -408,7 +405,10 @@ namespace HocPhi
                     converterProperties.SetFontProvider(fontProvider);
                     HtmlConverter.ConvertToPdf(result, pdfDest, converterProperties);
                 }
-
+                toolStripStatusLabel1.Text = i.Hoten_HocSinh;
+                Thread.Sleep(1);
+                if (progress != null)
+                    progress.Report(j); j++;
 
             }
         }
