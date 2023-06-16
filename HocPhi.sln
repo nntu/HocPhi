@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HocPhi", "HocPhi\HocPhi.csproj", "{880D4B1A-3AD3-442A-83DD-08E077ED37B4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testreport", "testreport\testreport.csproj", "{A13FF3DA-B11F-4DF8-92D8-26D3BCF77E4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{880D4B1A-3AD3-442A-83DD-08E077ED37B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{880D4B1A-3AD3-442A-83DD-08E077ED37B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{880D4B1A-3AD3-442A-83DD-08E077ED37B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A13FF3DA-B11F-4DF8-92D8-26D3BCF77E4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A13FF3DA-B11F-4DF8-92D8-26D3BCF77E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A13FF3DA-B11F-4DF8-92D8-26D3BCF77E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A13FF3DA-B11F-4DF8-92D8-26D3BCF77E4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

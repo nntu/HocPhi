@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using static HocPhi.DataModel;
+ 
 
 namespace HocPhi
 {
@@ -29,7 +29,7 @@ namespace HocPhi
         private string qrfolder;
 
         private string temp_template_excel;
-        List<TienNop> listtiennp;
+     
         private Config _cf;
         private string KetxuatFilefolder;
 
@@ -83,8 +83,8 @@ namespace HocPhi
         private void lb_Template_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var timestamp = DateTime.Now.ToString("ddMMyyyy_hhmmss");
-            FileInfo fi = new FileInfo(@"Template_DongThap_2023.xlsx");
-            temp_template_excel = string.Format("{0}\\Template_DongThap_2023_{1}.xlsx", tempfolder, timestamp);
+            FileInfo fi = new FileInfo(@"Template_2023.xlsx");
+            temp_template_excel = string.Format("{0}\\Template_2023_{1}.xlsx", tempfolder, timestamp);
             fi.CopyTo(temp_template_excel, true);
             Process process = new Process();
             process.StartInfo.FileName = temp_template_excel;
@@ -152,23 +152,23 @@ namespace HocPhi
                             DataFormatter formatter = new DataFormatter();
 
                             //Stt	TenTK_Nop	Tai_khoan_nop	ma_hs	Hoten_HocSinh	Lop	LoaiPhi	So_tien
+                            var phonggd = curRow.GetCell(0) == null ? "" : formatter.FormatCellValue(curRow.GetCell(0)).Trim();
 
+                            var TenTK_Nop = curRow.GetCell(1) == null ? "" : formatter.FormatCellValue(curRow.GetCell(1)).Trim();
+                            var Tai_khoan_nop = curRow.GetCell(2) == null ? "" : formatter.FormatCellValue(curRow.GetCell(2)).Trim();
+                            var ma_hs = curRow.GetCell(4) == null ? "" : formatter.FormatCellValue(curRow.GetCell(4)).Trim();
 
-                            var TenTK_Nop = curRow.GetCell(0) == null ? "" : formatter.FormatCellValue(curRow.GetCell(0)).Trim();
-                            var Tai_khoan_nop = curRow.GetCell(1) == null ? "" : formatter.FormatCellValue(curRow.GetCell(1)).Trim();
-                            var ma_hs = curRow.GetCell(3) == null ? "" : formatter.FormatCellValue(curRow.GetCell(3)).Trim();
-
-                            var Hoten_HocSinh = curRow.GetCell(5) == null ? "" : formatter.FormatCellValue(curRow.GetCell(5)).Trim();
-                            var Lop = curRow.GetCell(4) == null ? "" : formatter.FormatCellValue(curRow.GetCell(4)).Trim();
+                            var Hoten_HocSinh = curRow.GetCell(6) == null ? "" : formatter.FormatCellValue(curRow.GetCell(6)).Trim();
+                            var Lop = curRow.GetCell(5) == null ? "" : formatter.FormatCellValue(curRow.GetCell(5)).Trim();
 
                             //Loai_thu_1 	So_tien_thu_1	Loai_thu_2	So_tien_thu_2	Loai_thu_3	So_tien_thu_3 	Loai_thu_4	So_tien_thu_4 	Loai_thu_5	So_tien_thu_5 	Loai_thu_6	So_tien_thu_6 	Loai_thu_7	So_tien_thu_7 	Loai_thu_8	So_tien_thu_8	Loai_thu_9	So_tien_thu_9	Loai_thu_10	So_tien_thu_10
 
                             Dictionary<string, int> loaithu = new Dictionary<string, int>();
                             var tongsotien = 0;
                             var noidung = "";
-                            for (var ii = 6; ii <= 24; ii++)
+                            for (var ii = 7; ii <= 25; ii++)
                             {
-                                if (ii % 2 == 0)
+                                if (ii % 2 != 0)
                                 {
                                     if (curRow.GetCell(ii) != null)
                                     {
@@ -199,7 +199,7 @@ namespace HocPhi
                                 Lop = Lop,
                                 LoaiThu = loaithu,
                                 Tong_So_Tien = tongsotien,
-                                NoiDung = noidung
+                                NoiDung = noidung, Phong_GD = phonggd
                             });
                         }
 
@@ -424,9 +424,9 @@ namespace HocPhi
             };
         }
 
-        
-
-      
- 
+        private void button2_Click(object sender, EventArgs e)
+        {
+          
+        }
     }
 }
