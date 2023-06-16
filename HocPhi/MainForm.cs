@@ -1,7 +1,10 @@
 ﻿using Fluid;
 using iText.Html2pdf;
 using iText.Html2pdf.Resolver.Font;
+using iText.Kernel.Pdf;
+using iText.Kernel.Utils;
 using iText.Layout.Font;
+using iText.StyledXmlParser.Css.Media;
 using NLog;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -16,28 +19,25 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Xml.Linq;
- 
 
 namespace HocPhi
 {
     public partial class MainForm : Form
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        
+
         private string tempfolder;
         private string qrfolder;
         private string fontDir = "fonts";
         private string temp_template_excel;
-     
+
         private Config _cf;
         private string KetxuatFilefolder;
-
 
         public MainForm()
         {
@@ -64,7 +64,7 @@ namespace HocPhi
             bt_mauQr.BackColor = ColorTranslator.FromHtml(_cf.MauQR);
 
             tempfolder = AppDomain.CurrentDomain.BaseDirectory + "temp";
-            qrfolder = Directory.GetCurrentDirectory() + @"\qrcode";
+          
             KetxuatFilefolder = Directory.GetCurrentDirectory() + @"\ketxuat";
 
             // If directory doesn't exist create one
@@ -76,13 +76,9 @@ namespace HocPhi
             {
                 Directory.CreateDirectory(KetxuatFilefolder);
             }
-            if (!Directory.Exists(qrfolder))
-            {
-                Directory.CreateDirectory(qrfolder);
-            }
+           
 
             TemplateOptions.Default.MemberAccessStrategy = new UnsafeMemberAccessStrategy();
-
         }
 
         private void lb_Template_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -98,7 +94,6 @@ namespace HocPhi
 
         private async void bt_CreateQR_LoadFile_Click(object sender, EventArgs e)
         {
-
             toolStripProgressBar1.Visible = true;
 
             toolStripProgressBar1.Value = 0;
@@ -126,6 +121,7 @@ namespace HocPhi
                 dataGridView1.DataSource = res;
             }
         }
+
         private List<TienNop> LoadThongTinExcel(IProgress<int> progress, ISheet sheet)
         {
             try
@@ -177,19 +173,16 @@ namespace HocPhi
                                 {
                                     if (curRow.GetCell(ii) != null)
                                     {
-
                                         var loai_thu = formatter.FormatCellValue(curRow.GetCell(ii)).Trim();
                                         if (loai_thu != "")
                                         {
                                             var So_tien_ex = formatter.FormatCellValue(curRow.GetCell(ii + 1)).Trim();
                                             var sotien = 0;
                                             if (So_tien_ex != "") { sotien = Convert.ToInt32(So_tien_ex); }
-                                            
+
                                             loaithu[loai_thu] = sotien;
                                             tongsotien += sotien;
                                             noidung = noidung + "," + loai_thu;
-
-
                                         }
                                     }
                                 }
@@ -204,7 +197,8 @@ namespace HocPhi
                                 Lop = Lop,
                                 LoaiThu = loaithu,
                                 Tong_So_Tien = tongsotien,
-                                NoiDung = noidung, Phong_GD = phonggd
+                                NoiDung = noidung,
+                                Phong_GD = phonggd
                             });
                         }
 
@@ -240,12 +234,8 @@ namespace HocPhi
             }
         }
 
-
-
-
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -265,14 +255,8 @@ namespace HocPhi
                     toolStripProgressBar1.Value = percent;
                 });
 
-
-
                 var ls = (List<TienNop>)dataGridView1.DataSource;
                 toolStripProgressBar1.Maximum = ls.Count();
-
-
-                               
-
 
                 KetxuatFilefolder = $"{KetxuatFilefolder}\\{DateTime.Now.ToString("ddMMyyyy_hhmmss")}";
                 if (!Directory.Exists(KetxuatFilefolder))
@@ -293,22 +277,17 @@ namespace HocPhi
                     Directory.CreateDirectory(html);
                 }
 
-
-
-                await Task.Run(() => CreateQR(progress, ls, KetxuatFilefolder));
-               
+                await Task.Run(() => CreateQR(progress, ls, KetxuatFilefolder,rb_export1file.Checked,tb_tenfilepdf.Text));
 
                 toolStripProgressBar1.Visible = false;
                 toolStripStatusLabel1.Visible = false;
                 OpenExplorer(KetxuatFilefolder);
             }
-
-
-
         }
 
-        private void CreateQR(IProgress<int> progress, List<TienNop> ds, string ketxuatFilefolder)
+        private void CreateQR(IProgress<int> progress, List<TienNop> ds, string ketxuatFilefolder, bool xuat1file , string tenfile)
         {
+            List<string> listfile = new List<string>(); 
             var j = 1;
             foreach (var i in ds)
             {
@@ -316,7 +295,6 @@ namespace HocPhi
                 var hotenhs = StringEx.RemoveVietnameseTone(i.Hoten_HocSinh).ToUpper();
                 var file_pdf = string.Format("{0}_{1}_{2}_{3}.pdf", i.ma_hs, hotenhs, i.Lop, DateTime.Now.ToString("ddMMyyyy_hhmmss"));
                 var noidung_full = StringEx.RemoveVietnameseTone(string.Format("{0} {1} {2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.NoiDung)).ToUpper();
-
 
                 var vietqr_full = Generator.Generator_QRNapas("BIDV", i.Tai_khoan_nop, i.Tong_So_Tien, noidung_full);
 
@@ -338,7 +316,7 @@ namespace HocPhi
 
                 var parser = new FluidParser();
                 var context = new Fluid.TemplateContext();
-                
+
                 // lay thong tin tiên nop
                 context.SetValue("tienNop", i);
 
@@ -353,9 +331,6 @@ namespace HocPhi
                 var a = 1;
                 foreach (KeyValuePair<string, int> j2 in i.LoaiThu)
                 {
-
-                    
-
                     var tknhan = i.Tai_khoan_nop;
                     string noidung = StringEx.RemoveVietnameseTone(string.Format("{0} {1} {2} TTT {3}", i.ma_hs, hotenhs, i.Lop, j2.Key)).ToUpper();
                     var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, j2.Value, noidung);
@@ -363,75 +338,80 @@ namespace HocPhi
                     qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
                     qrCode = new QRCode(qrCodeData);
                     qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
-                    var imagePath_lite = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Key))).ToUpper();
+                    string imagePath_lite = $@"{KetxuatFilefolder}\qrcode\{ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Key))).ToUpper()}";
                     qrCodeImage.Save(imagePath_lite, ImageFormat.Png);
-                    qrtieumuc.Add(new QRTieuMuc() {
+                    qrtieumuc.Add(new QRTieuMuc()
+                    {
                         STT = a,
-                    Muc = j2.Key,
-                    sotien = j2.Value,
-                    QRcode = "data:image/png;base64," + Convert.ToBase64String(File.ReadAllBytes(imagePath_lite)),
+                        Muc = j2.Key,
+                        sotien = j2.Value,
+                        QRcode = "data:image/png;base64," + Convert.ToBase64String(File.ReadAllBytes(imagePath_lite)),
+                    });
 
-                });
-                  
                     a++;
                 }
                 context.SetValue("tieumuc", qrtieumuc);
 
-
-
-
-
-
-
-
-
                 var template = parser.Parse(data);
 
                 var result = template.Render(context);
-                var html_scr = KetxuatFilefolder + "\\html\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.html", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper();
+                string html_scr = $@"{KetxuatFilefolder}\qrcode\{ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.html", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper()}";
 
                 using (var sw = new StreamWriter(File.Open(html_scr, FileMode.OpenOrCreate), Encoding.UTF8)) // UTF-8 encoding
                 {
                     sw.WriteLine(result);
                 }
 
-                using (FileStream pdfDest = File.Open(KetxuatFilefolder + "\\" +file_pdf, FileMode.Create))
+                
+                using (FileStream pdfDest = File.Open(KetxuatFilefolder + "\\" + file_pdf, FileMode.Create))
                 {
                     ConverterProperties converterProperties = new ConverterProperties();
                     FontProvider fontProvider = new DefaultFontProvider();
-
+                    MediaDeviceDescription mediaDeviceDescription = new MediaDeviceDescription(MediaType.PRINT);
+                    converterProperties.SetMediaDeviceDescription(mediaDeviceDescription);
                     fontProvider.AddDirectory(fontDir);
 
                     converterProperties.SetFontProvider(fontProvider);
                     HtmlConverter.ConvertToPdf(result, pdfDest, converterProperties);
                 }
+                listfile.Add(KetxuatFilefolder + "\\" + file_pdf);
                 toolStripStatusLabel1.Text = i.Hoten_HocSinh;
                 Thread.Sleep(1);
                 if (progress != null)
                     progress.Report(j); j++;
+            }
+
+            if (xuat1file) {
+                PdfDocument pdf = new PdfDocument(new PdfWriter(KetxuatFilefolder + "\\" + tenfile));
+                PdfMerger merger = new PdfMerger(pdf);
+                foreach (var i in listfile) {
+
+                    PdfDocument firstSourcePdf = new PdfDocument(new PdfReader(i));
+                    merger.Merge(firstSourcePdf, 1, firstSourcePdf.GetNumberOfPages());
+                    firstSourcePdf.Close();
+                }
+               
+               
+                pdf.Close();
 
             }
+
         }
 
-            public string ReplaceInvalidChars(string filename)
+        public string ReplaceInvalidChars(string filename)
         {
             return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
         }
 
-       
-
-
         private void CreateQR_WordFile(IProgress<int> progress, List<TienNop> ds, string KetxuatFilefolder)
         {
-          
-
             var j = 1;
             foreach (var i in ds)
             {
                 // lấy thông tin học sinh
                 var hotenhs = StringEx.RemoveVietnameseTone(i.Hoten_HocSinh).ToUpper();
-                var filename = string.Format("{0}_{1}_{2}_{3}.docx", i.ma_hs, hotenhs, i.Lop, DateTime.Now.ToString("ddMMyyyy_hhmmss"));
-               
+                var filename = $"{i.ma_hs}_{hotenhs}_{i.Lop}_{DateTime.Now.ToString("ddMMyyyy_hhmmss")}.docx";
+
                 // đọc file mẫu thông báo
                 XWPFDocument doc;
                 using (Stream fileStream = File.OpenRead("THONG_BAO.docx"))
@@ -444,19 +424,19 @@ namespace HocPhi
                 {
                     para.ReplaceText("{hoten}", i.Hoten_HocSinh);
                     para.ReplaceText("{lop}", i.Lop);
-                    para.ReplaceText("{mahs}", i.ma_hs);    
+                    para.ReplaceText("{mahs}", i.ma_hs);
                 }
 
                 var noidung_full = StringEx.RemoveVietnameseTone(string.Format("{0} {1} {2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.NoiDung)).ToUpper();
-                                
+
                 //lấy thông tin bảng đầu tiên
                 var tb1 = doc.Tables[0];
 
                 var c2 = tb1.GetRow(0).GetCell(1);
-                XWPFParagraph p2= c2.AddParagraph();
+                XWPFParagraph p2 = c2.AddParagraph();
                 XWPFRun r2 = p2.CreateRun();
                 r2.SetText(i.Tong_So_Tien.ToString("#,##0"));
-               
+
                 c2 = tb1.GetRow(1).GetCell(1);
                 p2 = c2.AddParagraph();
                 r2 = p2.CreateRun();
@@ -471,12 +451,12 @@ namespace HocPhi
                 QRCodeData qrCodeData = qrGenerator.CreateQrCode(vietqr_full, QRCodeGenerator.ECCLevel.Q);
                 Bitmap qrCodeImage;
                 QRCode qrCode = new QRCode(qrCodeData);
-                qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White,  (Bitmap)Bitmap.FromFile("logobidv.png"));
+                qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
 
                 var widthEmus = (int)(qrCodeImage.Width * 650);
                 var heightEmus = (int)(qrCodeImage.Height * 650);
 
-                var imagePath_full = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop,"full"))).ToUpper();
+                var imagePath_full = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper();
                 qrCodeImage.Save(imagePath_full, ImageFormat.Png);
                 using (FileStream picData = new FileStream(imagePath_full, FileMode.Open, FileAccess.Read))
                 {
@@ -488,10 +468,9 @@ namespace HocPhi
                 var a = 1;
                 foreach (KeyValuePair<string, int> j2 in i.LoaiThu)
                 {
-
                     XWPFTableRow tableRowTwo = tb2.CreateRow();
                     tableRowTwo.GetCell(0).SetText(a.ToString());
-                    tableRowTwo.GetCell(1).SetText(j2.Key); 
+                    tableRowTwo.GetCell(1).SetText(j2.Key);
                     tableRowTwo.GetCell(2).SetText(j2.Value.ToString("#,##0"));
 
                     var tknhan = i.Tai_khoan_nop;
@@ -500,11 +479,11 @@ namespace HocPhi
 
                     var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, j2.Value, noidung);
 
-                     qrGenerator = new QRCodeGenerator();
-                     qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
-                    
-                     qrCode = new QRCode(qrCodeData);
-                    qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White,   (Bitmap)Bitmap.FromFile("logobidv.png"));
+                    qrGenerator = new QRCodeGenerator();
+                    qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
+
+                    qrCode = new QRCode(qrCodeData);
+                    qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
 
                     var imagePath_lite = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Key))).ToUpper();
 
@@ -514,13 +493,13 @@ namespace HocPhi
                     r1 = p1.CreateRun();
                     using (FileStream picData = new FileStream(imagePath_lite, FileMode.Open, FileAccess.Read))
                     {
-                        r1.AddPicture(picData, (int)NPOI.SS.UserModel.PictureType.PNG, "image1", widthEmus/2, heightEmus/2);
+                        r1.AddPicture(picData, (int)NPOI.SS.UserModel.PictureType.PNG, "image1", widthEmus / 2, heightEmus / 2);
                     }
 
                     a++;
                 }
 
-                using (FileStream fileStreamNew = File.Create(KetxuatFilefolder + "\\"+ filename))
+                using (FileStream fileStreamNew = File.Create(KetxuatFilefolder + "\\" + filename))
                 {
                     doc.Write(fileStreamNew);
                     fileStreamNew.Close();
@@ -530,7 +509,6 @@ namespace HocPhi
                 if (progress != null)
                     progress.Report(j); j++;
             }
-           
         }
 
         private void bt_mauQr_Click(object sender, EventArgs e)
@@ -543,7 +521,34 @@ namespace HocPhi
 
         private void button2_Click(object sender, EventArgs e)
         {
-          
+        }
+
+        private void rb_ExportALLfile_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb != null)
+            {
+                if (rb.Checked)
+                {
+                    // Only one radio button will be checked
+                    groupBox4.Enabled = false;
+                }
+            }
+        }
+
+        private void rb_export1file_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+            if (rb != null)
+            {
+                if (rb.Checked)
+                {
+                    // Only one radio button will be checked
+                    groupBox4.Enabled = true;
+                    var tenfile = string.Format("file_{0:dd_MM_yyyy_hhmmss}.pdf", DateTime.Now);
+                    tb_tenfilepdf.Text = tenfile;
+                }
+            }
         }
     }
 }

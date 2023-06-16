@@ -1,19 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Documents;
 
 namespace HocPhi
 {
     public class LoaiChi
     {
-
         public string Loai { get; set; }
         public string Chu_Thich { get; set; }
     }
 
-
     public class TienNop
     {
-
         public int Stt { get; set; }
         public string Phong_GD { get; set; }
         public string TenTK_Nop { get; set; }

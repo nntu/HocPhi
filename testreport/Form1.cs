@@ -1,15 +1,11 @@
-﻿ 
-using System;
- 
-using System.Windows.Forms;
-
-using System.IO;
- 
+﻿
+using Fluid;
 using iText.Html2pdf;
 using iText.Html2pdf.Resolver.Font;
 using iText.Layout.Font;
-using Fluid;
-using Scriban;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace testreport
 {
@@ -26,9 +22,10 @@ namespace testreport
         {
             TemplateOptions.Default.MemberAccessStrategy = new UnsafeMemberAccessStrategy();
 
-            var tienNop = new TienNop() {
+            var tienNop = new TienNop()
+            {
                 Hoten_HocSinh = "nguyen van a",
-                Phong_gd ="phong qn",
+                Phong_gd = "phong qn",
                 Tai_khoan_nop = "trường tiểu học Ngô Quyền"
             };
 
@@ -50,7 +47,7 @@ namespace testreport
             {
                 ConverterProperties converterProperties = new ConverterProperties();
                 FontProvider fontProvider = new DefaultFontProvider();
-               
+
                 fontProvider.AddDirectory(fontDir);
 
                 converterProperties.SetFontProvider(fontProvider);
