@@ -46,6 +46,8 @@ namespace HocPhi
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            var tenfile = string.Format("TongHop_{0:dd_MM_yyyy_hhmmss}.pdf", DateTime.Now);
+            tb_tenfilepdf.Text = tenfile;
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             this.Text = this.Text + " " + version.ToString();
             _cf = Config.Load();
@@ -382,13 +384,18 @@ namespace HocPhi
             }
 
             if (xuat1file) {
+                toolStripStatusLabel1.Text = "Chuẩn bị nhập file:";
                 PdfDocument pdf = new PdfDocument(new PdfWriter(KetxuatFilefolder + "\\" + tenfile));
                 PdfMerger merger = new PdfMerger(pdf);
+                j = 1;
                 foreach (var i in listfile) {
 
                     PdfDocument firstSourcePdf = new PdfDocument(new PdfReader(i));
                     merger.Merge(firstSourcePdf, 1, firstSourcePdf.GetNumberOfPages());
                     firstSourcePdf.Close();
+                    Thread.Sleep(1);
+                    if (progress != null)
+                        progress.Report(j); j++;
                 }
                
                
@@ -545,7 +552,7 @@ namespace HocPhi
                 {
                     // Only one radio button will be checked
                     groupBox4.Enabled = true;
-                    var tenfile = string.Format("file_{0:dd_MM_yyyy_hhmmss}.pdf", DateTime.Now);
+                    var tenfile = string.Format("TongHop_{0:dd_MM_yyyy_hhmmss}.pdf", DateTime.Now);
                     tb_tenfilepdf.Text = tenfile;
                 }
             }
