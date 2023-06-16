@@ -78,6 +78,9 @@
     <Reference Include="itext.forms, Version=8.0.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.8.0.0\lib\net461\itext.forms.dll</HintPath>
     </Reference>
+    <Reference Include="itext.html2pdf, Version=5.0.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext7.pdfhtml.5.0.0\lib\net461\itext.html2pdf.dll</HintPath>
+    </Reference>
     <Reference Include="itext.io, Version=8.0.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.8.0.0\lib\net461\itext.io.dll</HintPath>
     </Reference>
@@ -422,8 +425,8 @@
     <Content Include="thongbao_template.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="templates\Report.tpl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Templates\Report.tpl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -438,7 +441,7 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>; Move all assemblies and related files to lib folder
-ROBOCOPY "$(TargetDir) " "$(TargetDir)lib\ " /XF *.exe *.config *.manifest *.svg *.docx *.xlsx *.ttf *.json *.png *.pdf /XD lib logs data fonts /E /IS /MOVE
+ROBOCOPY "$(TargetDir) " "$(TargetDir)lib\ " /XF *.exe *.config *.manifest *.svg *.docx *.xlsx *.ttf *.json *.png *.pdf /XD lib logs data fonts Templates  /E /IS /MOVE
 if %25errorlevel%25 leq 4 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
 </Project>

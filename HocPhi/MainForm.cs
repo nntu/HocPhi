@@ -1,4 +1,8 @@
-﻿using NLog;
+﻿using Fluid;
+using iText.Html2pdf;
+using iText.Html2pdf.Resolver.Font;
+using iText.Layout.Font;
+using NLog;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.XWPF.UserModel;
@@ -12,6 +16,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Documents;
@@ -27,7 +32,7 @@ namespace HocPhi
         
         private string tempfolder;
         private string qrfolder;
-
+        private string fontDir = "fonts";
         private string temp_template_excel;
      
         private Config _cf;
@@ -76,7 +81,7 @@ namespace HocPhi
                 Directory.CreateDirectory(qrfolder);
             }
 
-        
+            TemplateOptions.Default.MemberAccessStrategy = new UnsafeMemberAccessStrategy();
 
         }
 
@@ -281,11 +286,16 @@ namespace HocPhi
                     Directory.CreateDirectory(qrfolder);
                 }
 
-                
+                var html = $"{KetxuatFilefolder}\\html";
 
-               
-               
-                    await Task.Run(() => CreateQR(progress, ls, KetxuatFilefolder));
+                if (!Directory.Exists(html))
+                {
+                    Directory.CreateDirectory(html);
+                }
+
+
+
+                await Task.Run(() => CreateQR(progress, ls, KetxuatFilefolder));
                
 
                 toolStripProgressBar1.Visible = false;
@@ -296,7 +306,114 @@ namespace HocPhi
 
 
         }
-        public string ReplaceInvalidChars(string filename)
+
+        private void CreateQR(Progress<int> progress, List<TienNop> ds, string ketxuatFilefolder)
+        {
+            var j = 1;
+            foreach (var i in ds)
+            {
+                // lấy thông tin học sinh
+                var hotenhs = StringEx.RemoveVietnameseTone(i.Hoten_HocSinh).ToUpper();
+                var file_pdf = string.Format("{0}_{1}_{2}_{3}.pdf", i.ma_hs, hotenhs, i.Lop, DateTime.Now.ToString("ddMMyyyy_hhmmss"));
+                var noidung_full = StringEx.RemoveVietnameseTone(string.Format("{0} {1} {2} TTT {3}", i.ma_hs, hotenhs, i.Lop, i.NoiDung)).ToUpper();
+
+
+                var vietqr_full = Generator.Generator_QRNapas("BIDV", i.Tai_khoan_nop, i.Tong_So_Tien, noidung_full);
+
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(vietqr_full, QRCodeGenerator.ECCLevel.Q);
+                Bitmap qrCodeImage;
+                QRCode qrCode = new QRCode(qrCodeData);
+                qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
+
+                var widthEmus = (int)(qrCodeImage.Width * 650);
+                var heightEmus = (int)(qrCodeImage.Height * 650);
+
+                var imagePath_full = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper();
+                qrCodeImage.Save(imagePath_full, ImageFormat.Png);
+
+                // load tempalte
+                var fileName = "templates\\Report.tpl";
+                var data = File.ReadAllText(fileName);
+
+                var parser = new FluidParser();
+                var context = new Fluid.TemplateContext();
+                
+                // lay thong tin tiên nop
+                context.SetValue("tienNop", i);
+
+                //thong tin qrcode full
+                var bytes = File.ReadAllBytes(imagePath_full);
+                var b64String = Convert.ToBase64String(bytes);
+                var dataUrl = "data:image/png;base64," + b64String;
+                context.SetValue("qrcode_full", dataUrl);
+
+                List<QRTieuMuc> qrtieumuc = new List<QRTieuMuc>();
+
+                var a = 1;
+                foreach (KeyValuePair<string, int> j2 in i.LoaiThu)
+                {
+
+                    
+
+                    var tknhan = i.Tai_khoan_nop;
+                    string noidung = StringEx.RemoveVietnameseTone(string.Format("{0} {1} {2} TTT {3}", i.ma_hs, hotenhs, i.Lop, j2.Key)).ToUpper();
+                    var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, j2.Value, noidung);
+                    qrGenerator = new QRCodeGenerator();
+                    qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
+                    qrCode = new QRCode(qrCodeData);
+                    qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
+                    var imagePath_lite = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Key))).ToUpper();
+                    qrCodeImage.Save(imagePath_lite, ImageFormat.Png);
+                    qrtieumuc.Add(new QRTieuMuc() {
+                        STT = a,
+                    Muc = j2.Key,
+                    sotien = j2.Value,
+                    QRcode = "data:image/png;base64," + Convert.ToBase64String(File.ReadAllBytes(imagePath_lite)),
+
+                });
+                  
+                    a++;
+                }
+                context.SetValue("tieumuc", qrtieumuc);
+
+
+
+
+
+
+
+
+
+                var template = parser.Parse(data);
+
+                var result = template.Render(context);
+                var html_scr = KetxuatFilefolder + "\\html\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.html", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper();
+
+                using (var sw = new StreamWriter(File.Open(html_scr, FileMode.OpenOrCreate), Encoding.UTF8)) // UTF-8 encoding
+                {
+                    sw.WriteLine(result);
+                }
+
+
+
+
+                using (FileStream pdfDest = File.Open(KetxuatFilefolder + "\\" +file_pdf, FileMode.Create))
+                {
+                    ConverterProperties converterProperties = new ConverterProperties();
+                    FontProvider fontProvider = new DefaultFontProvider();
+
+                    fontProvider.AddDirectory(fontDir);
+
+                    converterProperties.SetFontProvider(fontProvider);
+                    HtmlConverter.ConvertToPdf(result, pdfDest, converterProperties);
+                }
+
+
+            }
+        }
+
+            public string ReplaceInvalidChars(string filename)
         {
             return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
         }
@@ -304,7 +421,7 @@ namespace HocPhi
        
 
 
-        private void CreateQR(IProgress<int> progress, List<TienNop> ds, string KetxuatFilefolder)
+        private void CreateQR_WordFile(IProgress<int> progress, List<TienNop> ds, string KetxuatFilefolder)
         {
           
 

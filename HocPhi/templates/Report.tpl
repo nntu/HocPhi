@@ -6,18 +6,28 @@
 
 <p class="p_tieude">
 <strong>
-<span style='font-size:17px;font-family:"Times New Roman",serif;color:red;'>{{ tienNop.Phong_gd }}
+<span style='font-size:17px;font-family:"Times New Roman",serif;color:red;'>{{ tienNop.Phong_GD }}
 </span>
 </strong>
 </p>
-<p class="p_tieude"><strong><span style='font-size:17px;font-family:"Times New Roman",serif;color:red;'>{{ tienNop.Tai_khoan_nop }} </span></strong></p>
+<p class="p_tieude"><strong><span style='font-size:17px;font-family:"Times New Roman",serif;color:red;'>{{ tienNop.TenTK_Nop }} </span></strong></p>
 <p class="p_tieude_center"><strong><span style='font-size:19px;font-family:"Times New Roman",serif;'>&nbsp;</span></strong></p>
-<p class="p_tieude_center"><strong><span style='font-size:19px;font-family:"Times New Roman",serif;'>TH&Ocirc;NG B&Aacute;O TIỀN HỌC PH&Iacute;</span></strong></p>
+<p class="p_tieude_center"><strong><span style='font-size:19px;font-family:"Times New Roman",serif;'>THÔNG BÁO TIỀN HỌC PHÍ</span></strong></p>
 <p class="p_tieude_center"><span style='font-size:19px;font-family:"Times New Roman",serif;'>Năm học 2023-2024</span></p>
 <p class="p_tieude_center"><span style='font-size:19px;font-family:"Times New Roman",serif;'>&nbsp;</span></p>
-<p class="p_tieude"><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>K&iacute;nh gửi: Qu&yacute; phụ huynh,</span></p>
-<p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>Họ v&agrave; t&ecirc;n học sinh</span><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>:</span></strong><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>&nbsp;</span></strong><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:red;'>Nguyễn H&agrave; Minh Anh &nbsp; &nbsp; &nbsp; &nbsp;</span></strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>Lớp<strong>:&nbsp;</strong></span><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:red;'>2A</span></strong><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>&nbsp; &nbsp; &nbsp;&nbsp;</span></strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>&nbsp; &nbsp; &nbsp; M&atilde; học sinh<strong>:&nbsp;</strong></span><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:red;'>123461</span></strong></p>
-<p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>&nbsp;</span></strong></p>
+<p class="p_tieude"><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>Kính gửi: Quý phụ huynh,</span></p>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>
+    <span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>Họ v&agrave; t&ecirc;n học sinh</span><strong>
+        <span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>:</span></strong>
+        <strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>&nbsp;</span>
+        </strong><strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:red;'>{{ tienNop.Hoten_HocSinh }}</span></strong>
+        <span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>Lớp<strong>:&nbsp;</strong></span><strong>
+            <span style='font-size:19px;font-family:"Times New Roman",serif;color:red;'>{{ tienNop.Lop }}</span></strong><strong>
+                <span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>&nbsp; &nbsp; &nbsp;&nbsp;</span></strong>
+                <span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>Mã học sinh<strong>:&nbsp;</strong></span><strong>
+                    <span style='font-size:19px;font-family:"Times New Roman",serif;color:red;'>{{ tienNop.ma_hs }}</span></strong></p>
+<p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>
+    <strong><span style='font-size:19px;font-family:"Times New Roman",serif;color:black;'>&nbsp;</span></strong></p>
 <table style="width: 510.3pt; margin-left: -.25pt; border-collapse: collapse; border: none;">
     <tbody>
     <tr style="height: 39px;">
@@ -41,65 +51,22 @@
     <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; height: 27px; vertical-align: top;">
     <p style="line-height: normal; font-size: 15px; font-family: 'Calibri',sans-serif; text-align: center; margin: 0in;"><strong><span class="span_t">QRcode</span></strong></p>
     </td>
-    <td style="width: 209pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; height: 135.438px; vertical-align: top;" rowspan="10">{{ qrcode_full }}
+    <td style="width: 209pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; height: 135.438px; vertical-align: top;" rowspan="10">
     <p style="line-height: normal; font-size: 15px; font-family: 'Calibri',sans-serif; text-align: center; margin: 0in;"><span style="font-size: 17px; font-family: 'Times New Roman',serif;">&nbsp;        
-        <img style="width: 141pt; height: 141pt;" src="data:image/png;base64," alt="image" /></span></p>
+        <img style="width: 141pt; height: 141pt;" src="{{ qrcode_full }}" alt="image" /></span></p>
     </td>
     </tr>
+	{% for item in tieumuc %}
     <tr style="height: 22px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 22px;">1</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">Học phí</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">677,346</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;"><img style="width: 83.25pt; height: 79.5pt;" src="data:image/png;base64," alt="image" /></td>
+    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 22px;">{{ item.STT }}</td>
+    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">{{ item.Muc }}</td>
+    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">{{ item.sotien }}</td>
+    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">
+	<img style="width: 83pt; height: 83pt;" src="{{ item.QRcode }}" alt="image" /></td>
+	
     </tr>
-    <tr style="height: 22px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 22px;">2</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">ISMAT</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">256,256</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;"><img style="width: 86.25pt; height: 79.5pt;" src="data:image/png;base64," alt="image" /></td>
-    </tr>
-    <tr style="height: 21.4375px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    </tr>
-    <tr style="height: 21.4375px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    </tr>
-    <tr style="height: 21.4375px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    </tr>
-    <tr style="height: 21.4375px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    </tr>
-    <tr style="height: 21.4375px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">ss</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21.4375px;">&nbsp;</td>
-    </tr>
-    <tr style="height: 21px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 21px;">&nbsp;</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21px;">&nbsp;</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21px;">&nbsp;</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 21px;">&nbsp;</td>
-    </tr>
-    <tr style="height: 22px;">
-    <td style="width: 35.4pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; vertical-align: top; height: 22px;">2</td>
-    <td style="width: 96.35pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">ISMAT</td>
-    <td style="width: 71.55pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;">256,256</td>
-    <td style="width: 98pt; border-top: none; border-left: none; border-bottom: 1pt solid windowtext; border-right: 1pt solid windowtext; padding: 0in 5.4pt; vertical-align: top; height: 22px;"><img style="width: 86.25pt; height: 79.5pt;" src="data:image/png;base64," alt="image" /></td>
-    </tr>
+	{% endfor %}
+    
     <tr style="height: 20px;">
     <td style="width: 131.75pt; border-right: 1pt solid windowtext; border-bottom: 1pt solid windowtext; border-left: 1pt solid windowtext; border-image: initial; border-top: none; padding: 0in 5.4pt; height: 20px; vertical-align: top;" colspan="2">
     <p style="line-height: normal; font-size: 15px; font-family: 'Calibri',sans-serif; margin: 0in;"><strong><span class="span_t">Tổng cộng thu</span></strong></p>
