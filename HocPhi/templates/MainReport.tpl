@@ -1,5 +1,5 @@
 ﻿ <style>
- .p_tieude{margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Times New Roman",sans-serif;}
+ .p_tieude{margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Times New Roman";}
  .p_tieude_center {margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Times New Roman",sans-serif;text-align:center;}
  .span_t {font-size:17px;font-family:"Times New Roman";}
 	 .mainTable {		 
@@ -43,16 +43,16 @@
 			color: #313030;
 		}
 .header1 {
-	font-size:17px;font-family:"Times New Roman";color:red;}
-	 
-	 .chu{font-size:19px;font-family:"Times New Roman";color:black;}
+	font-size:17px;font-family:"Times New Roman";color:red;
+}
+.chu{font-size:19px;font-family:"Times New Roman";color:black;}
 </style>
 
 <p class="p_tieude"><strong><span class="header1">{{ tienNop.Phong_GD }}</span></strong></p>
 <p class="p_tieude"><strong><span class="header1">{{ tienNop.TenTK_Nop }} </span></strong></p>
 <p class="p_tieude_center"><strong><span style='font-size:19px;font-family:"Times New Roman";'>&nbsp;</span></strong></p>
-<p class="p_tieude_center"><strong><span style='font-size:19px;font-family:"Times New Roman";'>THÔNG BÁO TIỀN HỌC PHÍ</span></strong></p>
-<p class="p_tieude_center"><span style='font-size:19px;font-family:"Times New Roman";'>Năm học 2023-2024</span></p>
+<p class="p_tieude_center"><strong><span style='font-size:19px;font-family:"Times New Roman";'>{{ tienNop.Thong_bao }}</span></strong></p>
+<p class="p_tieude_center"><span style='font-size:19px;font-family:"Times New Roman";'>{{ tienNop.Ky_nop }}</span></p>
 <p class="p_tieude_center"><span style='font-size:19px;font-family:"Times New Roman";'>&nbsp;</span></p>
 <p class="p_tieude"><span class="chu">Kính gửi: Quý phụ huynh,</span></p>
 <p style='margin-top:0in;margin-right:0in;margin-bottom:0in;margin-left:0in;line-height:18.0pt;font-size:15px;font-family:"Times New Roman";text-align:justify;'>

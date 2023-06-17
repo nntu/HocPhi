@@ -36,6 +36,12 @@
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tb_tenfilepdf = new System.Windows.Forms.TextBox();
+            this.rb_export1file = new System.Windows.Forms.RadioButton();
+            this.rb_ExportALLfile = new System.Windows.Forms.RadioButton();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.bt_mauQr = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -44,12 +50,13 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tb_tenfilepdf = new System.Windows.Forms.TextBox();
-            this.rb_export1file = new System.Windows.Forms.RadioButton();
-            this.rb_ExportALLfile = new System.Windows.Forms.RadioButton();
+            this.button2 = new System.Windows.Forms.Button();
+            this.nud_so_cot_bd = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nud_so_loai = new System.Windows.Forms.NumericUpDown();
+            this.Thong_bao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ky_nop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sttDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phongGDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenTKNopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,8 +66,9 @@
             this.lopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.noiDungDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tongSoTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loaiThuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tienNopBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tb_edittemplates = new System.Windows.Forms.TabPage();
+           
             this.tabControl1.SuspendLayout();
             this.tb_CreateQR.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -68,16 +76,21 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_cot_bd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_loai)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).BeginInit();
+            this.tb_edittemplates.SuspendLayout();
+             
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tb_CreateQR);
+            this.tabControl1.Controls.Add(this.tb_edittemplates);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -130,6 +143,11 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.nud_so_loai);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.nud_so_cot_bd);
+            this.splitContainer1.Panel1.Controls.Add(this.button2);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox6);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
@@ -143,88 +161,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(786, 418);
             this.splitContainer1.SplitterDistance = 100;
             this.splitContainer1.TabIndex = 0;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.bt_mauQr);
-            this.groupBox6.Location = new System.Drawing.Point(203, 14);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(113, 77);
-            this.groupBox6.TabIndex = 42;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Màu QRcode";
-            // 
-            // bt_mauQr
-            // 
-            this.bt_mauQr.BackColor = System.Drawing.Color.Transparent;
-            this.bt_mauQr.Location = new System.Drawing.Point(21, 19);
-            this.bt_mauQr.Name = "bt_mauQr";
-            this.bt_mauQr.Size = new System.Drawing.Size(59, 44);
-            this.bt_mauQr.TabIndex = 0;
-            this.bt_mauQr.Text = "Màu QR";
-            this.bt_mauQr.UseVisualStyleBackColor = false;
-            this.bt_mauQr.Click += new System.EventHandler(this.bt_mauQr_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(649, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Tạo QR";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // bt_CreateQR_LoadFile
-            // 
-            this.bt_CreateQR_LoadFile.Location = new System.Drawing.Point(91, 9);
-            this.bt_CreateQR_LoadFile.Name = "bt_CreateQR_LoadFile";
-            this.bt_CreateQR_LoadFile.Size = new System.Drawing.Size(75, 23);
-            this.bt_CreateQR_LoadFile.TabIndex = 1;
-            this.bt_CreateQR_LoadFile.Text = "Đọc File";
-            this.bt_CreateQR_LoadFile.UseVisualStyleBackColor = true;
-            this.bt_CreateQR_LoadFile.Click += new System.EventHandler(this.bt_CreateQR_LoadFile_Click);
-            // 
-            // lb_Template
-            // 
-            this.lb_Template.AutoSize = true;
-            this.lb_Template.Location = new System.Drawing.Point(18, 14);
-            this.lb_Template.Name = "lb_Template";
-            this.lb_Template.Size = new System.Drawing.Size(67, 13);
-            this.lb_Template.TabIndex = 0;
-            this.lb_Template.TabStop = true;
-            this.lb_Template.Text = "Lấy File Mẫu";
-            this.lb_Template.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lb_Template_LinkClicked);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.sttDataGridViewTextBoxColumn,
-            this.phongGDDataGridViewTextBoxColumn,
-            this.tenTKNopDataGridViewTextBoxColumn,
-            this.taikhoannopDataGridViewTextBoxColumn,
-            this.mahsDataGridViewTextBoxColumn,
-            this.hotenHocSinhDataGridViewTextBoxColumn,
-            this.lopDataGridViewTextBoxColumn,
-            this.noiDungDataGridViewTextBoxColumn,
-            this.tongSoTienDataGridViewTextBoxColumn,
-            this.loaiThuDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.tienNopBindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(786, 314);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
             // 
             // groupBox3
             // 
@@ -289,6 +225,157 @@
             this.rb_ExportALLfile.UseVisualStyleBackColor = true;
             this.rb_ExportALLfile.CheckedChanged += new System.EventHandler(this.rb_ExportALLfile_CheckedChanged);
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.bt_mauQr);
+            this.groupBox6.Location = new System.Drawing.Point(203, 14);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(113, 77);
+            this.groupBox6.TabIndex = 42;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Màu QRcode";
+            // 
+            // bt_mauQr
+            // 
+            this.bt_mauQr.BackColor = System.Drawing.Color.Transparent;
+            this.bt_mauQr.Location = new System.Drawing.Point(21, 19);
+            this.bt_mauQr.Name = "bt_mauQr";
+            this.bt_mauQr.Size = new System.Drawing.Size(56, 43);
+            this.bt_mauQr.TabIndex = 0;
+            this.bt_mauQr.Text = "Màu QR";
+            this.bt_mauQr.UseVisualStyleBackColor = false;
+            this.bt_mauQr.Click += new System.EventHandler(this.bt_mauQr_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(648, 14);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Tạo QR";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // bt_CreateQR_LoadFile
+            // 
+            this.bt_CreateQR_LoadFile.Location = new System.Drawing.Point(91, 9);
+            this.bt_CreateQR_LoadFile.Name = "bt_CreateQR_LoadFile";
+            this.bt_CreateQR_LoadFile.Size = new System.Drawing.Size(75, 23);
+            this.bt_CreateQR_LoadFile.TabIndex = 1;
+            this.bt_CreateQR_LoadFile.Text = "Đọc File";
+            this.bt_CreateQR_LoadFile.UseVisualStyleBackColor = true;
+            this.bt_CreateQR_LoadFile.Click += new System.EventHandler(this.bt_CreateQR_LoadFile_Click);
+            // 
+            // lb_Template
+            // 
+            this.lb_Template.AutoSize = true;
+            this.lb_Template.Location = new System.Drawing.Point(18, 14);
+            this.lb_Template.Name = "lb_Template";
+            this.lb_Template.Size = new System.Drawing.Size(67, 13);
+            this.lb_Template.TabIndex = 0;
+            this.lb_Template.TabStop = true;
+            this.lb_Template.Text = "Lấy File Mẫu";
+            this.lb_Template.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lb_Template_LinkClicked);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.sttDataGridViewTextBoxColumn,
+            this.phongGDDataGridViewTextBoxColumn,
+            this.tenTKNopDataGridViewTextBoxColumn,
+            this.taikhoannopDataGridViewTextBoxColumn,
+            this.Thong_bao,
+            this.Ky_nop,
+            this.mahsDataGridViewTextBoxColumn,
+            this.hotenHocSinhDataGridViewTextBoxColumn,
+            this.lopDataGridViewTextBoxColumn,
+            this.noiDungDataGridViewTextBoxColumn,
+            this.tongSoTienDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.tienNopBindingSource;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.Size = new System.Drawing.Size(786, 314);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(648, 53);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 44;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // nud_so_cot_bd
+            // 
+            this.nud_so_cot_bd.Location = new System.Drawing.Point(105, 38);
+            this.nud_so_cot_bd.Name = "nud_so_cot_bd";
+            this.nud_so_cot_bd.Size = new System.Drawing.Size(39, 20);
+            this.nud_so_cot_bd.TabIndex = 45;
+            this.nud_so_cot_bd.Value = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "Số cột bắt đầu";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 48;
+            this.label3.Text = "Số Loại";
+            // 
+            // nud_so_loai
+            // 
+            this.nud_so_loai.Location = new System.Drawing.Point(105, 66);
+            this.nud_so_loai.Name = "nud_so_loai";
+            this.nud_so_loai.Size = new System.Drawing.Size(39, 20);
+            this.nud_so_loai.TabIndex = 47;
+            this.nud_so_loai.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // Thong_bao
+            // 
+            this.Thong_bao.DataPropertyName = "Thong_bao";
+            this.Thong_bao.HeaderText = "Thong_bao";
+            this.Thong_bao.Name = "Thong_bao";
+            this.Thong_bao.ReadOnly = true;
+            // 
+            // Ky_nop
+            // 
+            this.Ky_nop.DataPropertyName = "Ky_nop";
+            this.Ky_nop.HeaderText = "Ky_nop";
+            this.Ky_nop.Name = "Ky_nop";
+            this.Ky_nop.ReadOnly = true;
+            // 
             // sttDataGridViewTextBoxColumn
             // 
             this.sttDataGridViewTextBoxColumn.DataPropertyName = "Stt";
@@ -352,16 +439,22 @@
             this.tongSoTienDataGridViewTextBoxColumn.Name = "tongSoTienDataGridViewTextBoxColumn";
             this.tongSoTienDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // loaiThuDataGridViewTextBoxColumn
-            // 
-            this.loaiThuDataGridViewTextBoxColumn.DataPropertyName = "LoaiThu";
-            this.loaiThuDataGridViewTextBoxColumn.HeaderText = "LoaiThu";
-            this.loaiThuDataGridViewTextBoxColumn.Name = "loaiThuDataGridViewTextBoxColumn";
-            this.loaiThuDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // tienNopBindingSource
             // 
             this.tienNopBindingSource.DataSource = typeof(HocPhi.TienNop);
+            // 
+            // tb_edittemplates
+            // 
+            
+            this.tb_edittemplates.Location = new System.Drawing.Point(4, 22);
+            this.tb_edittemplates.Name = "tb_edittemplates";
+            this.tb_edittemplates.Padding = new System.Windows.Forms.Padding(3);
+            this.tb_edittemplates.Size = new System.Drawing.Size(792, 424);
+            this.tb_edittemplates.TabIndex = 1;
+            this.tb_edittemplates.Text = "Edit Template";
+            this.tb_edittemplates.UseVisualStyleBackColor = true;
+     
+          
             // 
             // MainForm
             // 
@@ -383,13 +476,17 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_cot_bd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_loai)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).EndInit();
+            this.tb_edittemplates.ResumeLayout(false);
+      
             this.ResumeLayout(false);
 
         }
@@ -410,16 +507,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button bt_mauQr;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sttDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phongGDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tenTKNopDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn taikhoannopDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn mahsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hotenHocSinhDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lopDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn noiDungDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tongSoTienDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn loaiThuDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource tienNopBindingSource;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
@@ -427,6 +514,25 @@
         private System.Windows.Forms.TextBox tb_tenfilepdf;
         private System.Windows.Forms.RadioButton rb_export1file;
         private System.Windows.Forms.RadioButton rb_ExportALLfile;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.NumericUpDown nud_so_cot_bd;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nud_so_loai;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sttDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn phongGDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tenTKNopDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn taikhoannopDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Thong_bao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ky_nop;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mahsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hotenHocSinhDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lopDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn noiDungDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tongSoTienDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn loaiThuDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TabPage tb_edittemplates;
+       
     }
 }
 

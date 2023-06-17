@@ -375,6 +375,7 @@
     </Compile>
     <Content Include="bidvapp.ico" />
     <Content Include="Lib\QRNapasLib.dll" />
+    <Content Include="Lib\WinFormHtmlEditor.dll" />
     <Content Include="logobidv.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -476,7 +477,7 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>; Move all assemblies and related files to lib folder
-ROBOCOPY "$(TargetDir) " "$(TargetDir)lib\ " /XF *.exe *.config *.manifest *.svg *.docx *.xlsx *.ttf *.json *.png *.pdf /XD lib logs data fonts Templates  /E /IS /MOVE
+ROBOCOPY "$(TargetDir) " "$(TargetDir)lib\ " /XF *.exe *.config *.manifest *.svg *.docx *.xlsx *.ttf *.json *.png *.pdf *.html /XD lib logs data fonts Templates ketxuat  /E /IS /MOVE
 if %25errorlevel%25 leq 4 exit 0 else exit %25errorlevel%25</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
