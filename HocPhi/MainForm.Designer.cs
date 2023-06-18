@@ -36,6 +36,11 @@
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nud_so_loai = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.nud_so_cot_bd = new System.Windows.Forms.NumericUpDown();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,19 +53,12 @@
             this.bt_CreateQR_LoadFile = new System.Windows.Forms.Button();
             this.lb_Template = new System.Windows.Forms.LinkLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.button2 = new System.Windows.Forms.Button();
-            this.nud_so_cot_bd = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.nud_so_loai = new System.Windows.Forms.NumericUpDown();
-            this.Thong_bao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ky_nop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sttDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phongGDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenTKNopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taikhoannopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Thong_bao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ky_nop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mahsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hotenHocSinhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,7 +66,8 @@
             this.tongSoTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tienNopBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tb_edittemplates = new System.Windows.Forms.TabPage();
-           
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
             this.tb_CreateQR.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -76,15 +75,13 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_loai)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_cot_bd)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_so_cot_bd)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_so_loai)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).BeginInit();
-            this.tb_edittemplates.SuspendLayout();
-             
             this.SuspendLayout();
             // 
             // tabControl1
@@ -161,6 +158,59 @@
             this.splitContainer1.Size = new System.Drawing.Size(786, 418);
             this.splitContainer1.SplitterDistance = 100;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(21, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 48;
+            this.label3.Text = "Số Loại";
+            // 
+            // nud_so_loai
+            // 
+            this.nud_so_loai.Location = new System.Drawing.Point(105, 66);
+            this.nud_so_loai.Name = "nud_so_loai";
+            this.nud_so_loai.Size = new System.Drawing.Size(39, 20);
+            this.nud_so_loai.TabIndex = 47;
+            this.nud_so_loai.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(78, 13);
+            this.label1.TabIndex = 46;
+            this.label1.Text = "Số cột bắt đầu";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // nud_so_cot_bd
+            // 
+            this.nud_so_cot_bd.Location = new System.Drawing.Point(105, 38);
+            this.nud_so_cot_bd.Name = "nud_so_cot_bd";
+            this.nud_so_cot_bd.Size = new System.Drawing.Size(39, 20);
+            this.nud_so_cot_bd.TabIndex = 45;
+            this.nud_so_cot_bd.Value = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(648, 53);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 44;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // groupBox3
             // 
@@ -304,78 +354,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(786, 314);
             this.dataGridView1.TabIndex = 0;
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(648, 53);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 44;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
-            // nud_so_cot_bd
-            // 
-            this.nud_so_cot_bd.Location = new System.Drawing.Point(105, 38);
-            this.nud_so_cot_bd.Name = "nud_so_cot_bd";
-            this.nud_so_cot_bd.Size = new System.Drawing.Size(39, 20);
-            this.nud_so_cot_bd.TabIndex = 45;
-            this.nud_so_cot_bd.Value = new decimal(new int[] {
-            9,
-            0,
-            0,
-            0});
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 40);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(78, 13);
-            this.label1.TabIndex = 46;
-            this.label1.Text = "Số cột bắt đầu";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 68);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 48;
-            this.label3.Text = "Số Loại";
-            // 
-            // nud_so_loai
-            // 
-            this.nud_so_loai.Location = new System.Drawing.Point(105, 66);
-            this.nud_so_loai.Name = "nud_so_loai";
-            this.nud_so_loai.Size = new System.Drawing.Size(39, 20);
-            this.nud_so_loai.TabIndex = 47;
-            this.nud_so_loai.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // Thong_bao
-            // 
-            this.Thong_bao.DataPropertyName = "Thong_bao";
-            this.Thong_bao.HeaderText = "Thong_bao";
-            this.Thong_bao.Name = "Thong_bao";
-            this.Thong_bao.ReadOnly = true;
-            // 
-            // Ky_nop
-            // 
-            this.Ky_nop.DataPropertyName = "Ky_nop";
-            this.Ky_nop.HeaderText = "Ky_nop";
-            this.Ky_nop.Name = "Ky_nop";
-            this.Ky_nop.ReadOnly = true;
-            // 
             // sttDataGridViewTextBoxColumn
             // 
             this.sttDataGridViewTextBoxColumn.DataPropertyName = "Stt";
@@ -403,6 +381,20 @@
             this.taikhoannopDataGridViewTextBoxColumn.HeaderText = "Tai_khoan_nop";
             this.taikhoannopDataGridViewTextBoxColumn.Name = "taikhoannopDataGridViewTextBoxColumn";
             this.taikhoannopDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // Thong_bao
+            // 
+            this.Thong_bao.DataPropertyName = "Thong_bao";
+            this.Thong_bao.HeaderText = "Thong_bao";
+            this.Thong_bao.Name = "Thong_bao";
+            this.Thong_bao.ReadOnly = true;
+            // 
+            // Ky_nop
+            // 
+            this.Ky_nop.DataPropertyName = "Ky_nop";
+            this.Ky_nop.HeaderText = "Ky_nop";
+            this.Ky_nop.Name = "Ky_nop";
+            this.Ky_nop.ReadOnly = true;
             // 
             // mahsDataGridViewTextBoxColumn
             // 
@@ -445,7 +437,6 @@
             // 
             // tb_edittemplates
             // 
-            
             this.tb_edittemplates.Location = new System.Drawing.Point(4, 22);
             this.tb_edittemplates.Name = "tb_edittemplates";
             this.tb_edittemplates.Padding = new System.Windows.Forms.Padding(3);
@@ -453,8 +444,11 @@
             this.tb_edittemplates.TabIndex = 1;
             this.tb_edittemplates.Text = "Edit Template";
             this.tb_edittemplates.UseVisualStyleBackColor = true;
-     
-          
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
             // 
             // MainForm
             // 
@@ -476,17 +470,15 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_loai)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_so_cot_bd)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_so_cot_bd)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_so_loai)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).EndInit();
-            this.tb_edittemplates.ResumeLayout(false);
-      
             this.ResumeLayout(false);
 
         }
@@ -532,7 +524,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tongSoTienDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn loaiThuDataGridViewTextBoxColumn;
         private System.Windows.Forms.TabPage tb_edittemplates;
-       
     }
 }
 

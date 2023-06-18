@@ -196,9 +196,28 @@ namespace HocPhi
                                         var loai_thu = formatter.FormatCellValue(curRow.GetCell(ii)).Trim();
                                         if (loai_thu != "")
                                         {
-                                            var So_tien_ex = formatter.FormatCellValue(curRow.GetCell(ii + 1)).Trim();
-                                            var sotien = 0;
-                                            if (So_tien_ex != "") { sotien = Convert.ToInt32(So_tien_ex); }
+                                             var cell = curRow.GetCell(ii + 1);
+                                        var sotien = 0;
+                                        if (cell != null)
+                                                {
+                                                    // TODO: you can add more cell types capatibility, e. g. formula
+                                                    switch (cell.CellType)
+                                                    {
+                                                        case NPOI.SS.UserModel.CellType.Numeric:
+                                                            sotien = (int)cell.NumericCellValue;
+                                                            //dataGridView1[j, i].Value = sh.GetRow(i).GetCell(j).NumericCellValue;
+
+                                                            break;
+                                                        case NPOI.SS.UserModel.CellType.String:
+                                                            sotien = Convert.ToInt32(cell.StringCellValue);
+
+                                                            break;
+                                                    }
+                                                }
+                                        
+
+                                           
+                                          //  if (So_tien_ex != "") { sotien = Convert.ToInt32(So_tien_ex); }
                                             
                                             loaithu.Add(new LoaiThu() { 
                                                 maloai =aa,
@@ -395,7 +414,7 @@ namespace HocPhi
                 using (FileStream pdfDest = File.Open(KetxuatFilefolder + "\\" + file_pdf, FileMode.Create))
                 {
                     ConverterProperties converterProperties = new ConverterProperties();
-                    FontProvider fontProvider = new FontProvider("Times New Roman");
+                    FontProvider fontProvider = new FontProvider("Roboto");
                     MediaDeviceDescription mediaDeviceDescription = new MediaDeviceDescription(MediaType.PRINT);
                     converterProperties.SetMediaDeviceDescription(mediaDeviceDescription);
 
