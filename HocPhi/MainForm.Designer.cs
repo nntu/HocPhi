@@ -53,6 +53,9 @@
             this.bt_CreateQR_LoadFile = new System.Windows.Forms.Button();
             this.lb_Template = new System.Windows.Forms.LinkLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tb_edittemplates = new System.Windows.Forms.TabPage();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.sttDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phongGDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenTKNopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,9 +68,6 @@
             this.noiDungDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tongSoTienDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tienNopBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tb_edittemplates = new System.Windows.Forms.TabPage();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
             this.tb_CreateQR.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -197,7 +197,7 @@
             this.nud_so_cot_bd.Size = new System.Drawing.Size(39, 20);
             this.nud_so_cot_bd.TabIndex = 45;
             this.nud_so_cot_bd.Value = new decimal(new int[] {
-            9,
+            4,
             0,
             0,
             0});
@@ -354,6 +354,21 @@
             this.dataGridView1.Size = new System.Drawing.Size(786, 314);
             this.dataGridView1.TabIndex = 0;
             // 
+            // tb_edittemplates
+            // 
+            this.tb_edittemplates.Location = new System.Drawing.Point(4, 22);
+            this.tb_edittemplates.Name = "tb_edittemplates";
+            this.tb_edittemplates.Padding = new System.Windows.Forms.Padding(3);
+            this.tb_edittemplates.Size = new System.Drawing.Size(792, 424);
+            this.tb_edittemplates.TabIndex = 1;
+            this.tb_edittemplates.Text = "Edit Template";
+            this.tb_edittemplates.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            // 
             // sttDataGridViewTextBoxColumn
             // 
             this.sttDataGridViewTextBoxColumn.DataPropertyName = "Stt";
@@ -434,21 +449,6 @@
             // tienNopBindingSource
             // 
             this.tienNopBindingSource.DataSource = typeof(HocPhi.TienNop);
-            // 
-            // tb_edittemplates
-            // 
-            this.tb_edittemplates.Location = new System.Drawing.Point(4, 22);
-            this.tb_edittemplates.Name = "tb_edittemplates";
-            this.tb_edittemplates.Padding = new System.Windows.Forms.Padding(3);
-            this.tb_edittemplates.Size = new System.Drawing.Size(792, 424);
-            this.tb_edittemplates.TabIndex = 1;
-            this.tb_edittemplates.Text = "Edit Template";
-            this.tb_edittemplates.UseVisualStyleBackColor = true;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
             // 
             // MainForm
             // 

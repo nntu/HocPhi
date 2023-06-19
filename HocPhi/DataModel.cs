@@ -13,14 +13,13 @@ namespace HocPhi
     {
         public int Stt { get; set; }
         public string Phong_GD { get; set; }
+        public string TenTruong { get; set; }
         public string TenTK_Nop { get; set; }
         public string Tai_khoan_nop { get; set; }
         public string ma_hs { get; set; }
         public string Hoten_HocSinh { get; set; }
         public string Lop { get; set; }
-
         public string Thong_bao { get; set; }
-
         public string Ky_nop { get; set; }
         public string NoiDung { get; set; }
         public string dsmaloai { get; set; }
