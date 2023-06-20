@@ -87,7 +87,7 @@
  </p>
  <p class="p_tieude">
    <strong>
-     <span class="header1">{{ tienNop.TenTK_Nop }} </span>
+     <span class="header1">{{ tienNop.TenTruong }} </span>
    </strong>
  </p>
  <p class="p_tieude_center">

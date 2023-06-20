@@ -56,6 +56,7 @@
             this.tb_edittemplates = new System.Windows.Forms.TabPage();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.winFormHtmlEditor1 = new SpiceLogic.WinHTMLEditor.WinForm.WinFormHtmlEditor();
             this.sttDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.phongGDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tenTKNopDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,6 +82,8 @@
             this.groupBox4.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tb_edittemplates.SuspendLayout();
+            this.winFormHtmlEditor1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -331,7 +334,6 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -351,11 +353,13 @@
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dataGridView1.Size = new System.Drawing.Size(786, 314);
             this.dataGridView1.TabIndex = 0;
             // 
             // tb_edittemplates
             // 
+            this.tb_edittemplates.Controls.Add(this.winFormHtmlEditor1);
             this.tb_edittemplates.Location = new System.Drawing.Point(4, 22);
             this.tb_edittemplates.Name = "tb_edittemplates";
             this.tb_edittemplates.Padding = new System.Windows.Forms.Padding(3);
@@ -363,11 +367,72 @@
             this.tb_edittemplates.TabIndex = 1;
             this.tb_edittemplates.Text = "Edit Template";
             this.tb_edittemplates.UseVisualStyleBackColor = true;
+            this.tb_edittemplates.Enter += new System.EventHandler(this.tb_edittemplates_Enter);
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "Excel Files (*.xlsx)|*.xlsx";
+            // 
+            // winFormHtmlEditor1
+            // 
+            this.winFormHtmlEditor1.AllowWebInEditorNavigationInPreview = false;
+            this.winFormHtmlEditor1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.winFormHtmlEditor1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.winFormHtmlEditor1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.winFormHtmlEditor1.BackgroundImagePath = "";
+            this.winFormHtmlEditor1.BaseUrl = "";
+            this.winFormHtmlEditor1.BodyColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.winFormHtmlEditor1.BodyHtml = "";
+            this.winFormHtmlEditor1.BodyStyle = "";
+            this.winFormHtmlEditor1.Charset = "unicode";
+            this.winFormHtmlEditor1.DefaultForeColor = System.Drawing.Color.Black;
+            this.winFormHtmlEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.winFormHtmlEditor1.DocumentCSSFilePath = "";
+            this.winFormHtmlEditor1.DocumentHtml = resources.GetString("winFormHtmlEditor1.DocumentHtml");
+            this.winFormHtmlEditor1.DocumentTitle = "";
+            this.winFormHtmlEditor1.EditorContextMenuStrip = null;
+            this.winFormHtmlEditor1.Location = new System.Drawing.Point(3, 3);
+            this.winFormHtmlEditor1.Name = "winFormHtmlEditor1";
+            this.winFormHtmlEditor1.Options.ConvertFileUrlsToLocalPaths = true;
+            this.winFormHtmlEditor1.Options.FooterTagNavigatorFont = null;
+            this.winFormHtmlEditor1.Options.FooterTagNavigatorTextColor = System.Drawing.Color.Teal;
+            this.winFormHtmlEditor1.Options.FTPSettingsForRemoteResources.Host = null;
+            this.winFormHtmlEditor1.Options.FTPSettingsForRemoteResources.Password = null;
+            this.winFormHtmlEditor1.Options.FTPSettingsForRemoteResources.RemoteFolderPath = null;
+            this.winFormHtmlEditor1.Options.FTPSettingsForRemoteResources.UrlOfTheRemoteFolderPath = null;
+            this.winFormHtmlEditor1.Options.FTPSettingsForRemoteResources.UserName = null;
+            this.winFormHtmlEditor1.Options.YouTubeVideoIFrameDefaultCSS = "border:1px;border-style:solid;border-color:gray;";
+            this.winFormHtmlEditor1.ScrollBarSetting = SpiceLogic.HtmlEditorControl.Domain.BOs.ScrollBarVisibility.Default;
+            this.winFormHtmlEditor1.Size = new System.Drawing.Size(786, 418);
+            this.winFormHtmlEditor1.SpellCheckOptions.DictionaryFilePath = null;
+            this.winFormHtmlEditor1.SpellCheckOptions.SuggestionMode = SpiceLogic.HtmlEditorControl.FrameworkExtensions.SpellCheck.NetSpell.Spelling.SuggestionEnum.PhoneticNearMiss;
+            this.winFormHtmlEditor1.SpellCheckOptions.WaitAlertMessage = "Searching next messpelled word..... (please wait)";
+            this.winFormHtmlEditor1.TabIndex = 0;
+            // 
+            // winFormHtmlEditor1.WinFormHtmlEditor_Toolbar1
+            // 
+            this.winFormHtmlEditor1.Toolbar1.Location = new System.Drawing.Point(0, 0);
+            this.winFormHtmlEditor1.Toolbar1.Name = "WinFormHtmlEditor_Toolbar1";
+            this.winFormHtmlEditor1.Toolbar1.Size = new System.Drawing.Size(786, 29);
+            this.winFormHtmlEditor1.Toolbar1.TabIndex = 0;
+            // 
+            // winFormHtmlEditor1.WinFormHtmlEditor_Toolbar2
+            // 
+            this.winFormHtmlEditor1.Toolbar2.Location = new System.Drawing.Point(0, 29);
+            this.winFormHtmlEditor1.Toolbar2.Name = "WinFormHtmlEditor_Toolbar2";
+            this.winFormHtmlEditor1.Toolbar2.Size = new System.Drawing.Size(786, 29);
+            this.winFormHtmlEditor1.Toolbar2.TabIndex = 0;
+            this.winFormHtmlEditor1.ToolbarContextMenuStrip = null;
+            // 
+            // winFormHtmlEditor1.WinFormHtmlEditor_ToolbarFooter
+            // 
+            this.winFormHtmlEditor1.ToolbarFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.winFormHtmlEditor1.ToolbarFooter.Location = new System.Drawing.Point(0, 393);
+            this.winFormHtmlEditor1.ToolbarFooter.Name = "WinFormHtmlEditor_ToolbarFooter";
+            this.winFormHtmlEditor1.ToolbarFooter.Size = new System.Drawing.Size(786, 25);
+            this.winFormHtmlEditor1.ToolbarFooter.TabIndex = 7;
+            this.winFormHtmlEditor1.z__ignore = false;
             // 
             // sttDataGridViewTextBoxColumn
             // 
@@ -478,6 +543,9 @@
             this.groupBox4.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tb_edittemplates.ResumeLayout(false);
+            this.winFormHtmlEditor1.ResumeLayout(false);
+            this.winFormHtmlEditor1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tienNopBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -524,6 +592,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tongSoTienDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn loaiThuDataGridViewTextBoxColumn;
         private System.Windows.Forms.TabPage tb_edittemplates;
+        private SpiceLogic.WinHTMLEditor.WinForm.WinFormHtmlEditor winFormHtmlEditor1;
     }
 }
 

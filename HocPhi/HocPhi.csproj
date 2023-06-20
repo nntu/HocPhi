@@ -461,6 +461,9 @@
     <Content Include="settings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Templates\MainReport-goc.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="THONG_BAO.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -470,19 +473,15 @@
     <Content Include="thongbao_template.docx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\Report.tpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Templates\MainReport.tpl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Templates\Report.tpl" />
+    <Content Include="Templates\MainReport.tpl" />
     <Content Include="Template_thuhp2023.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="report_excel.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templates\MainReport - Copy %282%29.tpl">
+    <Content Include="Templates\MainReport.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
