@@ -21,6 +21,11 @@ namespace testreport
 
         private void button1_Click(object sender, EventArgs e)
         {
+            TienNop tp = new TienNop();
+            tp.Stt = 1;
+           
+
+
             XtraReport1 xrp = new XtraReport1();
             xrp.CreateDocument();
             xrp.ShowPreview();

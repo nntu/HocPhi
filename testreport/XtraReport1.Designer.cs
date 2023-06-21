@@ -63,7 +63,7 @@
             // BottomMargin
             // 
             this.BottomMargin.Dpi = 254F;
-            this.BottomMargin.HeightF = 254F;
+            this.BottomMargin.HeightF = 300.4584F;
             this.BottomMargin.Name = "BottomMargin";
             // 
             // Detail
@@ -71,7 +71,7 @@
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable2});
             this.Detail.Dpi = 254F;
-            this.Detail.HeightF = 587.375F;
+            this.Detail.HeightF = 645.5833F;
             this.Detail.HierarchyPrintOptions.Indent = 50.8F;
             this.Detail.Name = "Detail";
             // 
@@ -213,9 +213,10 @@
             this.objectDataSource1});
             this.Dpi = 254F;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.Margins = new DevExpress.Drawing.DXMargins(254F, 0F, 320.1458F, 254F);
-            this.PageHeight = 2794;
-            this.PageWidth = 2159;
+            this.Margins = new DevExpress.Drawing.DXMargins(20F, 20F, 320.1458F, 300.4584F);
+            this.PageHeight = 2970;
+            this.PageWidth = 2100;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
             this.SnapGridSize = 25F;
             this.Version = "22.2";

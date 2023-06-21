@@ -1,4 +1,5 @@
-﻿using Fluid;
+﻿using DevExpress.XtraReports.UI;
+using Fluid;
 using iText.Html2pdf;
 using iText.Kernel.Pdf;
 using iText.Kernel.Utils;
@@ -643,23 +644,12 @@ namespace HocPhi
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            XWPFDocument doc;
-            using (Stream fileStream = File.OpenRead("thongbao_template.docx"))
-            {
-                doc = new XWPFDocument(fileStream);
-                fileStream.Close();
-            }
-            //lấy thông tin bảng đầu tiên
-            var tb1 = doc.Tables[0];
+            var ls = (List<TienNop>)dataGridView1.DataSource;
+            TaoBanIn taoBanIn = new TaoBanIn();
+            taoBanIn.DataSource = ls;
+            taoBanIn.CreateDocument();
+            taoBanIn.ShowPreviewDialog();
 
-            var c2 = tb1.GetRow(0);
-
-            string outputFileName = $@"report-{DateTime.Now.Ticks.ToString()}.docx";
-            using (FileStream fileStreamNew = File.Create(outputFileName))
-            {
-                doc.Write(fileStreamNew);
-                fileStreamNew.Close();
-            }
         }
 
         private void label1_Click(object sender, EventArgs e)
