@@ -9,5 +9,6 @@ namespace HocPhi
         public string MauQR { get; set; }
         public int[] CustomColors { get; set; }      
 
+        public string url_gioithieu { get; set; }   
     }
 }

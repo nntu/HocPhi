@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace HocPhi
 {
@@ -25,20 +24,16 @@ namespace HocPhi
         public string dsmaloai { get; set; }
         public int Tong_So_Tien { get; set; }
 
-         
-
         public List<LoaiThu> LoaiThu { get; set; }
     }
+
     public class LoaiThu
     {
-            public string maloai { get; set; }
-            public string Loai { get; set; }
+        public string maloai { get; set; }
+        public string Loai { get; set; }
 
-        public int  So_Tien{ get; set; }
-
+        public int So_Tien { get; set; }
     }
-
-
 
     public class QRTieuMuc
     {
