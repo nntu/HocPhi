@@ -446,6 +446,7 @@
     <Content Include="fonts\RobotoCondensed-Regular.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Readme.resx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\DataModel.TienNop.datasource" />
     <None Include="Properties\DataSources\TienNop.datasource" />
@@ -484,6 +485,10 @@
     <Content Include="Templates\MainReport.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Readme.Designer.md" />
+    <None Include="Readme.md">
+      <SubType>Form</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
