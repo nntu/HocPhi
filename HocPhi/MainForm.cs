@@ -217,7 +217,10 @@ namespace HocPhi
                                         Loai = loai_thu,
                                         So_Tien = sotien
                                     });
-                                    noidung = noidung == "" ? loai_thu : noidung + "," + loai_thu;
+                                    if (sotien != 0)
+                                    {
+                                        noidung = noidung == "" ? loai_thu : noidung + "," + loai_thu;
+                                    }
                                     //dsmaloai = dsmaloai == "" ? ma_loai : dsmaloai + "," + ma_loai;
                                     tongsotien = tongsotien + sotien;
                                 }
