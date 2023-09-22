@@ -23,7 +23,7 @@ namespace HocPhi
 
             return newText;
         }
-
+        //xoa ky tu dac biet
         public static string RemoveSpecialChars(string input)
         {
             return Regex.Replace(input, @"[^0-9a-zA-Z\., ]", string.Empty);
