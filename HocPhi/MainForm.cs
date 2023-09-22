@@ -332,7 +332,7 @@ namespace HocPhi
                 // lấy thông tin học sinh
                 var hotenhs = StringEx.RemoveVietnameseTone(i.Hoten_HocSinh).ToUpper();
                 var file_pdf = string.Format("{0}_{1}_{2}_{3}.pdf", i.ma_hs, hotenhs, i.Lop, DateTime.Now.ToString("ddMMyyyy_hhmmss"));
-                var noidung_full = StringEx.RemoveVietnameseTone(string.Format("{0}00 {2} {3} TT {4}", i.ma_hs, i.dsmaloai, i.Lop, hotenhs, i.NoiDung)).ToUpper();
+                var noidung_full = StringEx.RemoveSpecialChars( StringEx.RemoveVietnameseTone(string.Format("{0}00 {2} {3} TT {4}", i.ma_hs, i.dsmaloai, i.Lop, hotenhs, i.NoiDung)).ToUpper());
                 
 
                 if (noidung_full.Length >= 85)
