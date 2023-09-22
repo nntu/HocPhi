@@ -6,6 +6,7 @@ using iText.Layout.Element;
 using iText.Layout.Font;
 using iText.StyledXmlParser.Css.Media;
 using NLog;
+using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using NPOI.XWPF.UserModel;
@@ -143,8 +144,7 @@ namespace HocPhi
         /// <returns></returns>
         private List<TienNop> LoadThongTinExcel(IProgress<int> progress, ISheet sheet, int So_cot_BD, int so_loai)
         {
-            try
-            {
+            
                 List<TienNop> ds = new List<TienNop>();
                 if (sheet != null)
                 {
@@ -195,17 +195,22 @@ namespace HocPhi
                                     var loai_thu = sheet.GetRow(12).GetCell(ii, MissingCellPolicy.RETURN_NULL_AND_BLANK).ToString();
 
                                     var sotien = 0;
-                                    // TODO: you can add more cell types capatibility, e. g. formula
-                                    switch (cell.CellType)
-                                    {
-                                        case NPOI.SS.UserModel.CellType.Numeric:
-                                            sotien = (int)cell.NumericCellValue;
-                                            //dataGridView1[j, i].Value = sh.GetRow(i).GetCell(j).NumericCellValue;
+                                // TODO: you can add more cell types capatibility, e. g. formula
+                                switch (cell.CellType)
+                                {
+                                    case NPOI.SS.UserModel.CellType.Numeric:
+                                        sotien = (int)cell.NumericCellValue;
+                                        //dataGridView1[j, i].Value = sh.GetRow(i).GetCell(j).NumericCellValue;
 
-                                            break;
+                                        break;
 
-                                        case NPOI.SS.UserModel.CellType.String:
-                                            sotien = Convert.ToInt32(cell.StringCellValue);
+                                    case NPOI.SS.UserModel.CellType.String:
+                                        if (cell.StringCellValue.Trim() == "") { 
+                                            sotien = 0;
+                                        } else { 
+                                        
+                                        sotien = Convert.ToInt32(cell.StringCellValue); 
+                                        }
 
                                             break;
                                     }
@@ -216,7 +221,11 @@ namespace HocPhi
                                         Loai = loai_thu,
                                         So_Tien = sotien
                                     });
-                                    noidung = noidung == "" ? loai_thu : noidung + "," + loai_thu;
+                                    if (sotien != 0)
+                                    {
+
+                                        noidung = noidung == "" ? loai_thu : noidung + "," + loai_thu;
+                                    }
                                     //dsmaloai = dsmaloai == "" ? ma_loai : dsmaloai + "," + ma_loai;
                                     tongsotien = tongsotien + sotien;
                                 }
@@ -239,19 +248,14 @@ namespace HocPhi
                                 Ky_nop = Ky_nop.Trim(),
                                 TenTruong = tentruong
                             });
+                          
                         }
                         if (progress != null) progress.Report(i);
                     }
                 }
 
                 return ds;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                logger.Error(ex.Message);
-                return null;
-            }
+           
         }
 
         public static void OpenExplorer(string dir)
