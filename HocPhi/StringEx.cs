@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text.RegularExpressions;
 
 namespace HocPhi
@@ -39,6 +40,11 @@ namespace HocPhi
             result = Regex.Replace(result, "ỳ|ý|ỵ|ỷ|ỹ|/g", "y");
             result = Regex.Replace(result, "đ", "d");
             return result;
+        }
+
+        public static string ReplaceInvalidChars(string filename)
+        {
+            return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
         }
     }
 }

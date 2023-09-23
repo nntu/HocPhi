@@ -610,7 +610,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lopDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn noiDungDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tongSoTienDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn loaiThuDataGridViewTextBoxColumn;
+       
         private System.Windows.Forms.TabPage tb_edittemplates;
         private SpiceLogic.WinHTMLEditor.WinForm.WinFormHtmlEditor winFormHtmlEditor1;
         private System.Windows.Forms.TextBox textBox1;

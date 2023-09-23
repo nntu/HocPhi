@@ -182,7 +182,7 @@ namespace HocPhi
 
                             List<LoaiThu> loaithu = new List<LoaiThu>();
                             var noidung = "";
-                            var dsmaloai = "";
+                    
                             var tongsotien = 0;
                             int aa = 1;
                             for (var ii = So_cot_BD; ii <= so_loai + So_cot_BD - 1; ii++)
@@ -355,7 +355,7 @@ namespace HocPhi
                 var widthEmus = (int)(qrCodeImage.Width * 650);
                 var heightEmus = (int)(qrCodeImage.Height * 650);
 
-                var imagePath_full = $@"{qrfolder}\{ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper()}";
+                var imagePath_full = $@"{qrfolder}\{StringEx.ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper()}";
                 qrCodeImage.Save(imagePath_full, ImageFormat.Png);
 
                 // load tempalte
@@ -384,7 +384,7 @@ namespace HocPhi
                     qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
                     qrCode = new QRCode(qrCodeData);
                     qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
-                    string imagePath_lite = $@"{qrfolder}\{ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Loai))).ToUpper()}";
+                    string imagePath_lite = $@"{qrfolder}\{StringEx.ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Loai))).ToUpper()}";
 
                     qrCodeImage.Save(imagePath_lite, ImageFormat.Png);
                     qrtieumuc.Add(new QRTieuMuc()
@@ -402,7 +402,7 @@ namespace HocPhi
                 var template = parser.Parse(data);
 
                 var result = template.Render(context);
-                string html_scr = $@"{htmlfolder}\{ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.html", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper()}";
+                string html_scr = $@"{htmlfolder}\{StringEx.ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.html", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper()}";
 
                 using (var sw = new StreamWriter(File.Open(html_scr, FileMode.OpenOrCreate), Encoding.UTF8)) // UTF-8 encoding
                 {
@@ -488,7 +488,7 @@ namespace HocPhi
         //        var widthEmus = (int)(qrCodeImage.Width * 650);
         //        var heightEmus = (int)(qrCodeImage.Height * 650);
 
-        //        var imagePath_full = KetxuatFilefolder + "\\qrcode\\" + ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper();
+        //        var imagePath_full = KetxuatFilefolder + "\\qrcode\\" + StringEx.ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper();
         //        qrCodeImage.Save(imagePath_full, ImageFormat.Png);
 
         //        // load tempalte
@@ -519,7 +519,7 @@ namespace HocPhi
         //            qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
         //            qrCode = new QRCode(qrCodeData);
         //            qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
-        //            string imagePath_lite = $@"{KetxuatFilefolder}\qrcode\{ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Loai))).ToUpper()}";
+        //            string imagePath_lite = $@"{KetxuatFilefolder}\qrcode\{StringEx.ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.png", i.ma_hs, hotenhs, i.Lop, j2.Loai))).ToUpper()}";
         //            qrCodeImage.Save(imagePath_lite, ImageFormat.Png);
         //            qrtieumuc.Add(new QRTieuMuc()
         //            {
@@ -536,7 +536,7 @@ namespace HocPhi
         //        var template = parser.Parse(data);
 
         //        var result = template.Render(context);
-        //        string html_scr = $@"{KetxuatFilefolder}\html\{ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.html", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper()}";
+        //        string html_scr = $@"{KetxuatFilefolder}\html\{StringEx.ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("{0}_{1}_{2}_{3}.html", i.ma_hs, hotenhs, i.Lop, "full"))).ToUpper()}";
 
         //        using (var sw = new StreamWriter(File.Open(html_scr, FileMode.OpenOrCreate), Encoding.UTF8)) // UTF-8 encoding
         //        {
@@ -602,10 +602,7 @@ namespace HocPhi
 
         //}
 
-        public string ReplaceInvalidChars(string filename)
-        {
-            return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
-        }
+       
 
         private void bt_mauQr_Click(object sender, EventArgs e)
         {
