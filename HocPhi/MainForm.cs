@@ -6,6 +6,7 @@ using iText.Layout.Element;
 using iText.Layout.Font;
 using iText.StyledXmlParser.Css.Media;
 using NLog;
+using NPOI.HSSF.UserModel;
 using NPOI.SS.Formula.Functions;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -191,8 +192,8 @@ namespace HocPhi
 
                                 if (cell != null)
                                 {
-                                    var ma_loai = sheet.GetRow(11).GetCell(ii, MissingCellPolicy.RETURN_NULL_AND_BLANK).ToString();
-                                    var loai_thu = sheet.GetRow(12).GetCell(ii, MissingCellPolicy.RETURN_NULL_AND_BLANK).ToString();
+                                    var ma_loai = sheet.GetRow(11).GetCell(ii, MissingCellPolicy.RETURN_NULL_AND_BLANK);
+                                    var loai_thu = sheet.GetRow(12).GetCell(ii, MissingCellPolicy.RETURN_NULL_AND_BLANK);
 
                                     var sotien = 0;
                                 // TODO: you can add more cell types capatibility, e. g. formula
@@ -212,19 +213,28 @@ namespace HocPhi
                                         sotien = Convert.ToInt32(cell.StringCellValue); 
                                         }
 
-                                            break;
-                                    }
+                                        break;
+                                    case NPOI.SS.UserModel.CellType.Formula:
+                                         
+                                            XSSFFormulaEvaluator e = new XSSFFormulaEvaluator(cell.Sheet.Workbook);
+                                            e.EvaluateInCell(cell);
+                                            sotien = (int)cell.NumericCellValue;
+
+
+                                        break;
+
+                                }
 
                                     loaithu.Add(new LoaiThu()
                                     {
-                                        maloai = ma_loai,
-                                        Loai = loai_thu,
+                                        maloai = ma_loai.ToString(),
+                                        Loai = loai_thu.ToString(),
                                         So_Tien = sotien
                                     });
                                     if (sotien != 0)
                                     {
 
-                                        noidung = noidung == "" ? loai_thu : noidung + "," + loai_thu;
+                                        noidung = noidung == "" ? loai_thu.ToString() : noidung + "," + loai_thu.ToString();
                                     }
                                     //dsmaloai = dsmaloai == "" ? ma_loai : dsmaloai + "," + ma_loai;
                                     tongsotien = tongsotien + sotien;
@@ -379,7 +389,10 @@ namespace HocPhi
                 {
                     var tknhan = i.Tai_khoan_nop;
                     string noidung = StringEx.RemoveVietnameseTone(string.Format("{0}{1} {2} {3} TT {4}", i.ma_hs, j2.maloai, i.Lop, hotenhs, j2.Loai)).ToUpper();
-                    var vietqr = Generator.Generator_QRNapas("BIDV", tknhan, j2.So_Tien, noidung);
+                    var vietqr = "";
+                   
+                    vietqr = Generator.Generator_QRNapas("BIDV", tknhan, j2.So_Tien, noidung);
+                    
                     qrGenerator = new QRCodeGenerator();
                     qrCodeData = qrGenerator.CreateQrCode(vietqr, QRCodeGenerator.ECCLevel.Q);
                     qrCode = new QRCode(qrCodeData);

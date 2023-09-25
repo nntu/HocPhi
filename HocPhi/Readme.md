@@ -7,7 +7,7 @@ Chương trình tạo mã.
 
 ## Upgrade
 
-#1.2.2309.2023
+# 1.2.2309.2023
 - Fix lỗi ky tu đặc biệt trong tên
 - Don dẹp lại code
 
