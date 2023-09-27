@@ -7,6 +7,10 @@ Chương trình tạo mã.
 
 ## Upgrade
 
+# 1.2.2709.2023
+- fix lỗi đọc file excel : cho phép doc file khi dang mở, và lấy sheet active
+
+
 # 1.2.2309.2023
 - Fix lỗi ky tu đặc biệt trong tên
 - Don dẹp lại code
