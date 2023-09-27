@@ -122,12 +122,16 @@ namespace HocPhi
 
                 IWorkbook workbook;
 
-                FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
 
                 workbook = new XSSFWorkbook(fs);
 
                 //First sheet
-                ISheet sheet = workbook.GetSheetAt(0);
+                //Active Worksheet Index
+                var ActWsIndex = workbook.ActiveSheetIndex;
+          
+
+                ISheet sheet = workbook.GetSheetAt(ActWsIndex);
                 toolStripProgressBar1.Maximum = sheet.LastRowNum;
                 var res = await Task.Run(() => LoadThongTinExcel(progress, sheet, (int)nud_so_cot_bd.Value, (int)nud_so_loai.Value));
 
@@ -151,8 +155,8 @@ namespace HocPhi
                 {
                     int rowCount = sheet.LastRowNum; // This may not be valid row count.
                                                      // If first row is table head, i starts from 1
-                    IRow headerRow = sheet.GetRow(0);
-                    int cellCount = headerRow.LastCellNum;
+                  //  IRow headerRow = sheet.GetRow(0);
+                   // int cellCount = headerRow.LastCellNum;
                     var phonggd = sheet.GetRow(2).GetCell(0, MissingCellPolicy.RETURN_NULL_AND_BLANK).ToString();
                     var tentruong = sheet.GetRow(3).GetCell(0, MissingCellPolicy.RETURN_NULL_AND_BLANK).ToString();
                     var TenTK_Nop = sheet.GetRow(10).GetCell(1, MissingCellPolicy.RETURN_NULL_AND_BLANK).ToString();
