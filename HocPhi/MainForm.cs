@@ -238,7 +238,7 @@ namespace HocPhi
                                     if (sotien != 0)
                                     {
 
-                                        noidung = noidung == "" ? loai_thu.ToString() : noidung + "," + loai_thu.ToString();
+                                        noidung = noidung == "" ? loai_thu.ToString() : noidung + " " + loai_thu.ToString();
                                     }
                                     //dsmaloai = dsmaloai == "" ? ma_loai : dsmaloai + "," + ma_loai;
                                     tongsotien = tongsotien + sotien;
@@ -346,11 +346,30 @@ namespace HocPhi
             var j = 1;
             foreach (var i in ds)
             {
+                // tao qr cua trường
+                var tktruong = $@"{qrfolder}\{StringEx.ReplaceInvalidChars(StringEx.RemoveVietnameseTone(string.Format("tk_truong_{0}.png", i.Tai_khoan_nop))).ToUpper()}";
+                Bitmap qrCodeImage;
+                QRCodeGenerator qrGenerator;
+                QRCodeData qrCodeData;
+                QRCode qrCode;
+                if (!File.Exists(tktruong)) { 
+                    var qrtruong = Generator.Generator_QRNapas("BIDV", i.Tai_khoan_nop);
+                     qrGenerator = new QRCodeGenerator();
+                    qrCodeData = qrGenerator.CreateQrCode(qrtruong, QRCodeGenerator.ECCLevel.Q);
+                    
+                     qrCode = new QRCode(qrCodeData);
+                    qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
+
+                    
+
+                 qrCodeImage.Save(tktruong, ImageFormat.Png);
+                }
+
                 toolStripStatusLabel1.Text = i.Hoten_HocSinh;
                 // lấy thông tin học sinh
                 var hotenhs = StringEx.RemoveSpecialChars(StringEx.RemoveVietnameseTone(i.Hoten_HocSinh).ToUpper());
                 var file_pdf = string.Format("{0}_{1}_{2}_{3}.pdf", i.ma_hs, hotenhs, i.Lop, DateTime.Now.ToString("ddMMyyyy_hhmmss"));
-                var noidung_full = StringEx.RemoveSpecialChars( StringEx.RemoveVietnameseTone(string.Format("{0}00 {2} {3} TT {4}", i.ma_hs, i.dsmaloai, i.Lop, hotenhs, i.NoiDung)).ToUpper());
+                var noidung_full = StringEx.RemoveSpecialChars( StringEx.RemoveVietnameseTone(string.Format("{0} {2} {3} TT {4}", i.ma_hs, i.dsmaloai, i.Lop, hotenhs, i.NoiDung)).ToUpper());
                 
 
                 if (noidung_full.Length >= 85)
@@ -360,10 +379,10 @@ namespace HocPhi
                 noidung_full = noidung_full.Trim();
                 var vietqr_full = Generator.Generator_QRNapas("BIDV", i.Tai_khoan_nop, i.Tong_So_Tien, noidung_full);
 
-                QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(vietqr_full, QRCodeGenerator.ECCLevel.Q);
-                Bitmap qrCodeImage;
-                QRCode qrCode = new QRCode(qrCodeData);
+                 qrGenerator = new QRCodeGenerator();
+                 qrCodeData = qrGenerator.CreateQrCode(vietqr_full, QRCodeGenerator.ECCLevel.Q);
+                
+                 qrCode = new QRCode(qrCodeData);
                 qrCodeImage = qrCode.GetGraphic(40, bt_mauQr.BackColor, Color.White, (Bitmap)Bitmap.FromFile("logobidv.png"));
 
                 var widthEmus = (int)(qrCodeImage.Width * 650);
@@ -385,6 +404,10 @@ namespace HocPhi
                 //thong tin qrcode full
 
                 context.SetValue("qrcode_full", "qrcode/" + Path.GetFileName(imagePath_full));
+
+
+                context.SetValue("qrtktruong", "qrcode/" + Path.GetFileName(tktruong));
+                context.SetValue("tktruong", i.Tai_khoan_nop);
 
                 List<QRTieuMuc> qrtieumuc = new List<QRTieuMuc>();
 
